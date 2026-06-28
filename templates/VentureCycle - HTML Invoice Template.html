@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureCycle Studio - Invoice</title>
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css');
+        
+        @font-face {
+            font-family: 'AlibabaSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Regular.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'AlibabaSans-Medium';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Medium.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Alibaba-PuHuiTi-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Bold.otf') format('opentype');
+        }
+
+        :root {
+            --primary-color: #1ABC9C;
+            --text-color: #2D3436;
+            --bg-light: #F5F6FA;
+            --border-color: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            color: var(--text-color);
+            background-color: #ffffff;
+            width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .invoice-container {
+            width: 100%;
+            padding: 40px 60px;
+            background: #ffffff;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .company-info {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #636e72;
+        }
+
+        .company-name {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 16px;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .invoice-title-section {
+            text-align: right;
+        }
+
+        .invoice-title {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 36px;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .invoice-meta {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .meta-label {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            color: #636e72;
+        }
+
+        /* Info Section (Bill To & Details) */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--bg-light);
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .bill-to, .invoice-details {
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 14px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .info-text {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .info-label {
+            width: 120px;
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            color: #636e72;
+        }
+
+        /* Table Section */
+        .table-section {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th:nth-child(2), th:nth-child(3), th:nth-child(4) {
+            text-align: right;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td:nth-child(2), td:nth-child(3), td:nth-child(4) {
+            text-align: right;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #fafbfc;
+        }
+
+        .item-desc {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+        }
+
+        /* Totals Section */
+        .totals-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .totals-box {
+            width: 300px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .total-row.subtotal {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .total-row.final {
+            background-color: var(--primary-color);
+            color: white;
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 18px;
+            border-radius: 4px;
+            margin-top: 10px;
+            padding: 15px;
+        }
+
+        /* Payment & Notes Section */
+        .bottom-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .payment-info, .notes-info {
+            flex: 1;
+        }
+
+        .bottom-title {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 14px;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bottom-title i {
+            color: var(--primary-color);
+        }
+
+        .bottom-text {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #636e72;
+        }
+
+        .bank-details {
+            margin-top: 10px;
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .bank-row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        .bank-label {
+            width: 100px;
+            font-family: 'AlibabaSans-Medium', sans-serif;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .footer-company {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 12px;
+            color: #636e72;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-item i {
+            color: var(--primary-color);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo">
+                <div class="company-info">
+                    <div class="company-name">VentureCycle Studio</div>
+                    <div>Cairo, Egypt</div>
+                    <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7011181d15143006151e040502151309131c155e03040514191f">[email&#160;protected]</a></div>
+                </div>
+            </div>
+            <div class="invoice-title-section">
+                <div class="invoice-title">INVOICE</div>
+                <div class="invoice-meta">
+                    <div class="meta-row">
+                        <span class="meta-label">Invoice #:</span>
+                        <span>VC-INV-2026-001</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Date:</span>
+                        <span>March 15, 2026</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="bill-to">
+                <div class="section-title">Bill To</div>
+                <div class="info-text">
+                    <div class="company-name" style="margin-bottom: 8px;">[Client Company Name]</div>
+                    <div>[Client Address]</div>
+                    <div>[<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b6d5dadfd3d8c2f6d3dbd7dfda98d5d9db">[email&#160;protected]</a>]</div>
+                    <div>[Phone Number]</div>
+                </div>
+            </div>
+            <div class="invoice-details">
+                <div class="section-title">Invoice Details</div>
+                <div class="info-text">
+                    <div class="info-row">
+                        <span class="info-label">Invoice Number:</span>
+                        <span>VC-INV-2026-001</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Invoice Date:</span>
+                        <span>March 15, 2026</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Due Date:</span>
+                        <span style="color: var(--primary-color); font-family: 'AlibabaSans-Medium', sans-serif;">March 30, 2026</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">PO Number:</span>
+                        <span>[If applicable]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Description</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="item-desc">AI Automation System Development</td>
+                        <td>1</td>
+                        <td>$25,000</td>
+                        <td>$25,000</td>
+                    </tr>
+                    <tr>
+                        <td class="item-desc">System Integration Services</td>
+                        <td>40 hrs</td>
+                        <td>$150</td>
+                        <td>$6,000</td>
+                    </tr>
+                    <tr>
+                        <td class="item-desc">Arabic NLP Model Training</td>
+                        <td>1</td>
+                        <td>$8,000</td>
+                        <td>$8,000</td>
+                    </tr>
+                    <tr>
+                        <td class="item-desc">Technical Documentation</td>
+                        <td>1</td>
+                        <td>$2,000</td>
+                        <td>$2,000</td>
+                    </tr>
+                    <tr>
+                        <td class="item-desc">Training Sessions (2 days)</td>
+                        <td>2</td>
+                        <td>$1,500</td>
+                        <td>$3,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="totals-section">
+            <div class="totals-box">
+                <div class="total-row subtotal">
+                    <span class="meta-label">Subtotal:</span>
+                    <span>$44,000</span>
+                </div>
+                <div class="total-row">
+                    <span class="meta-label">Tax (if applicable):</span>
+                    <span>$0</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total Due:</span>
+                    <span>$44,000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="bottom-section">
+            <div class="payment-info">
+                <div class="bottom-title">
+                    <i class="ri-bank-card-line"></i> Payment Information
+                </div>
+                <div class="bottom-text">
+                    <div><strong>Payment Terms:</strong> Net 15 days</div>
+                    <div><strong>Payment Methods:</strong> Bank transfer, Wire transfer</div>
+                </div>
+                <div class="bank-details">
+                    <div class="bank-row">
+                        <span class="bank-label">Bank Name:</span>
+                        <span>[Bank Name]</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">Account #:</span>
+                        <span>[Account Number]</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">SWIFT Code:</span>
+                        <span>[SWIFT Code]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="notes-info">
+                <div class="bottom-title">
+                    <i class="ri-sticky-note-line"></i> Notes
+                </div>
+                <div class="bottom-text">
+                    "Thank you for your business! Payment is due within 15 days of invoice date. Please include invoice number in payment reference. For questions regarding this invoice, contact <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b0a03060e0f2b1d0e051f1e190e081208070e45181f1e0f0204">[email&#160;protected]</a>"
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-company">VentureCycle Studio</div>
+            <div class="footer-contacts">
+                <div class="contact-item">
+                    <i class="ri-global-line"></i> venturecycle.studio
+                </div>
+                <div class="contact-item">
+                    <i class="ri-mail-line"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8b9b0b5bdbc98aebdb6acadaabdbba1bbb4bdf6abacadbcb1b7">[email&#160;protected]</a>
+                </div>
+                <div class="contact-item">
+                    <i class="ri-phone-line"></i> +201501656010
+                </div>
+            </div>
+        </footer>
+    </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

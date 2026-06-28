@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=900, initial-scale=1.0">
+    <title>VentureCycle Studio - Change Request Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AlibabaSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Regular.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'AlibabaSans-Medium';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Medium.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Alibaba-PuHuiTi-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Bold.otf') format('opentype');
+        }
+
+        :root {
+            --primary: #1ABC9C;
+            --primary-hover: #16A085;
+            --secondary: #E6AA5B;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg-light: #F5F6FA;
+            --bg-white: #FFFFFF;
+            --border-color: #DFE6E9;
+            --danger: #D63031;
+            --success: #00B894;
+            --focus-ring: rgba(26, 188, 156, 0.2);
+            --content-width: 900px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            width: var(--content-width);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            background-color: var(--bg-white);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 48px;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .company-name {
+            font-family: 'Alibaba-PuHuiTi-Bold', sans-serif;
+            font-size: 24px;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .form-meta {
+            text-align: right;
+        }
+
+        .form-title {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .meta-id {
+            font-family: monospace;
+            background: var(--bg-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-dark);
+            font-weight: bold;
+        }
+
+        /* Intro */
+        .intro-banner {
+            background-color: rgba(26, 188, 156, 0.05);
+            padding: 24px 48px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .intro-icon {
+            font-size: 24px;
+            color: var(--primary);
+            margin-top: 2px;
+        }
+
+        .intro-text {
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+
+        /* Form Layout */
+        .form-content {
+            padding: 40px 48px;
+        }
+
+        .section {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 32px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .section-header {
+            background: var(--bg-light);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-number {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 12px;
+        }
+
+        .section-title {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+
+        .section-body {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Form Elements */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .required::after {
+            content: '*';
+            color: var(--danger);
+            margin-left: 2px;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: -4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .char-counter {
+            font-size: 11px;
+            color: var(--text-light);
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        /* Radio & Checkbox */
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .options-horizontal {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-family: 'AlibabaSans-Regular', sans-serif;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .option-desc {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-left: 24px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Priority specific */
+        .priority-item {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .priority-item:hover {
+            border-color: var(--primary);
+            background: rgba(26, 188, 156, 0.02);
+        }
+
+        .priority-critical { border-left: 3px solid var(--danger); }
+        .priority-high { border-left: 3px solid var(--secondary); }
+        .priority-medium { border-left: 3px solid #0984E3; }
+        .priority-low { border-left: 3px solid var(--text-light); }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: 6px;
+            padding: 24px;
+            text-align: center;
+            background: var(--bg-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(26, 188, 156, 0.02);
+        }
+
+        .file-upload i {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .file-upload-text {
+            font-size: 14px;
+            color: var(--text-dark);
+            font-family: 'AlibabaSans-Medium', sans-serif;
+        }
+
+        .file-upload-limit {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* Checkboxes Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        /* Acknowledgements */
+        .ack-section {
+            background: var(--bg-light);
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+
+        .ack-item {
+            margin-bottom: 12px;
+        }
+        .ack-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Actions */
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0;
+            border-top: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-light);
+            border-color: #B2BEC3;
+        }
+
+        .btn-link {
+            background: none;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .btn-link:hover {
+            color: var(--danger);
+            text-decoration: underline;
+        }
+
+        /* Post Info */
+        .post-info {
+            background: #fff9f0;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .post-info-title {
+            font-family: 'AlibabaSans-Medium', sans-serif;
+            color: #d35400;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .post-info-list {
+            list-style: none;
+            padding-left: 28px;
+        }
+
+        .post-info-list li {
+            position: relative;
+            font-size: 13px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .post-info-list li::before {
+            content: '•';
+            color: var(--secondary);
+            position: absolute;
+            left: -16px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 32px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Auto-save indicator */
+        .auto-save {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 12px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .auto-save i {
+            color: var(--success);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo">
+                <div class="company-name">VentureCycle Studio</div>
+            </div>
+            <div class="form-meta">
+                <h1 class="form-title">Change Request Form</h1>
+                <div class="meta-info">
+                    <span>ID: <span class="meta-id">CR-2026-084</span></span>
+                    <span>Date: <span id="current-date">October 15, 2026</span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Intro -->
+        <div class="intro-banner">
+            <i class="ri-information-line intro-icon"></i>
+            <div class="intro-text">
+                Use this form to request changes, enhancements, or new features for your AI automation system. All requests will be reviewed and estimated before implementation.
+            </div>
+        </div>
+
+        <form class="form-content">
+            
+            <!-- Section 1 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Requestor Information</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label class="required">Company Name</label>
+                        <input type="text" placeholder="e.g. Acme Corp" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Requestor Name</label>
+                        <input type="text" placeholder="First Last" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Email Address</label>
+                        <input type="email" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <input type="text" placeholder="e.g. Marketing, IT">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="required">Project/System Name</label>
+                        <input type="text" placeholder="Which system does this change apply to?" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">Change Details</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group full-width">
+                        <label class="required">Change Title</label>
+                        <input type="text" placeholder="Brief, descriptive title for this change" required>
+                        <div class="char-counter">0/100</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Change Type</label>
+                        <select required>
+                            <option value="" disabled selected>Select type...</option>
+                            <option>New Feature</option>
+                            <option>Feature Enhancement</option>
+                            <option>System Integration</option>
+                            <option>Performance Improvement</option>
+                            <option>UI/UX Change</option>
+                            <option>Database Modification</option>
+                            <option>Security Enhancement</option>
+                            <option>Configuration Change</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Change Category</label>
+                        <select>
+                            <option value="" disabled selected>Select category...</option>
+                            <option>Frontend</option>
+                            <option>Backend</option>
+                            <option>Database</option>
+                            <option>Infrastructure</option>
+                            <option>Integration</option>
+                            <option>Multiple Components</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Business Justification</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group full-width">
+                        <label class="required">Business Need</label>
+                        <textarea placeholder="Explain why this change is needed and what business problem it solves" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="required">Expected Benefits</label>
+                        <textarea placeholder="Describe the expected benefits and value this change will provide" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Target Users</label>
+                        <div class="help-text">Who will use or benefit from this change?</div>
+                        <input type="text" placeholder="e.g. Sales Team, External Customers">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="required">Priority</label>
+                        <div class="options-group">
+                            <label class="option-label priority-item priority-critical">
+                                <input type="radio" name="priority" required>
+                                <div>
+                                    <strong>Critical</strong>
+                                    <div class="option-desc">Required for business operations immediately</div>
+                                </div>
+                            </label>
+                            <label class="option-label priority-item priority-high">
+                                <input type="radio" name="priority">
+                                <div>
+                                    <strong>High</strong>
+                                    <div class="option-desc">Important for business goals, needed soon</div>
+                                </div>
+                            </label>
+                            <label class="option-label priority-item priority-medium">
+                                <input type="radio" name="priority">
+                                <div>
+                                    <strong>Medium</strong>
+                                    <div class="option-desc">Beneficial but not urgent</div>
+                                </div>
+                            </label>
+                            <label class="option-label priority-item priority-low">
+                                <input type="radio" name="priority">
+                                <div>
+                                    <strong>Low</strong>
+                                    <div class="option-desc">Nice to have, low impact</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Detailed Requirements</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group full-width">
+                        <label>Current Behavior</label>
+                        <div class="help-text">Describe how the system currently works</div>
+                        <textarea placeholder="The system currently..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="required">Desired Behavior</label>
+                        <div class="help-text">Describe in detail how you want the system to work after this change</div>
+                        <textarea placeholder="The system should..." required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="required">Acceptance Criteria</label>
+                        <textarea placeholder="List specific criteria that must be met for this change to be considered complete (e.g. 'User can click X and see Y')" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>User Stories</label>
+                        <textarea placeholder="As a [user type], I want to [action] so that [benefit]"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Technical Considerations</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group full-width">
+                        <label>Affected Systems/Components (Check all that apply)</label>
+                        <div class="checkbox-grid">
+                            <label class="option-label"><input type="checkbox"> API</label>
+                            <label class="option-label"><input type="checkbox"> Database</label>
+                            <label class="option-label"><input type="checkbox"> Frontend UI</label>
+                            <label class="option-label"><input type="checkbox"> Backend Services</label>
+                            <label class="option-label"><input type="checkbox"> 3rd-party Integrations</label>
+                            <label class="option-label"><input type="checkbox"> Authentication</label>
+                            <label class="option-label"><input type="checkbox"> Reporting</label>
+                            <label class="option-label" style="display:flex; align-items:center;">
+                                <input type="checkbox"> Other: 
+                                <input type="text" style="width:100px; padding:2px; margin-left:4px; height:24px;">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Dependencies</label>
+                        <div class="help-text">Are there any dependencies or prerequisites for this change?</div>
+                        <textarea placeholder="e.g. Requires update to CRM API first"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Data Migration Required?</label>
+                        <div class="options-group options-horizontal">
+                            <label class="option-label"><input type="radio" name="migration"> Yes</label>
+                            <label class="option-label"><input type="radio" name="migration"> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>If yes, describe:</label>
+                        <input type="text" placeholder="Describe migration needs">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">Impact Assessment</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label>Estimated Impact on Users</label>
+                        <select>
+                            <option value="" disabled selected>Select impact...</option>
+                            <option>No impact - Backend only</option>
+                            <option>Low - Minor UI changes</option>
+                            <option>Medium - Workflow changes</option>
+                            <option>High - Significant changes requiring training</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Risk Assessment</label>
+                        <select>
+                            <option value="" disabled selected>Select risk level...</option>
+                            <option>Low Risk</option>
+                            <option>Medium Risk</option>
+                            <option>High Risk</option>
+                            <option>Unknown</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Downtime Required?</label>
+                        <div class="options-group options-horizontal">
+                            <label class="option-label"><input type="radio" name="downtime"> Yes</label>
+                            <label class="option-label"><input type="radio" name="downtime"> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Acceptable Maintenance Window:</label>
+                        <input type="text" placeholder="e.g. Weekends, after 10PM EST">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2 class="section-title">Timeline & Budget</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label>Desired Completion Date</label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Is this date flexible?</label>
+                        <div class="options-group options-horizontal">
+                            <label class="option-label"><input type="radio" name="flexible"> Yes</label>
+                            <label class="option-label"><input type="radio" name="flexible"> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Budget Allocated</label>
+                        <select>
+                            <option value="" disabled selected>Select budget status...</option>
+                            <option>Within existing contract</option>
+                            <option>Additional budget available</option>
+                            <option>Budget approval needed</option>
+                            <option>Not sure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estimated Budget (if applicable)</label>
+                        <input type="text" placeholder="$">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2 class="section-title">Attachments & References</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group full-width">
+                        <label>Supporting Documents</label>
+                        <div class="help-text">Upload mockups, diagrams, specifications, or other relevant files</div>
+                        <div class="file-upload">
+                            <i class="ri-upload-cloud-2-line"></i>
+                            <div class="file-upload-text">Click to upload or drag and drop</div>
+                            <div class="file-upload-limit">PDF, DOCX, JPG, PNG (Max 25MB total)</div>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Reference Links</label>
+                        <textarea placeholder="Provide links to related documentation, examples, or references"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Related Change Requests</label>
+                        <input type="text" placeholder="List any related CR numbers (e.g. CR-2026-042)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <h2 class="section-title">Approval</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group">
+                        <label>Stakeholder Approval Obtained?</label>
+                        <div class="options-group options-horizontal">
+                            <label class="option-label"><input type="radio" name="approval"> Yes</label>
+                            <label class="option-label"><input type="radio" name="approval"> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Approver Name & Title</label>
+                        <input type="text" placeholder="e.g. Jane Doe, CTO">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Additional Approvers Required</label>
+                        <textarea placeholder="List any other individuals who need to approve this request"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10 -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">10</div>
+                    <h2 class="section-title">Additional Notes</h2>
+                </div>
+                <div class="section-body">
+                    <div class="form-group full-width">
+                        <label>Additional Comments</label>
+                        <div class="help-text">Any other information that would help us understand and implement this change</div>
+                        <textarea placeholder="Add comments here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acknowledgement -->
+            <div class="ack-section">
+                <label class="option-label ack-item">
+                    <input type="checkbox" required>
+                    I understand that this request will be reviewed and estimated before implementation
+                </label>
+                <label class="option-label ack-item">
+                    <input type="checkbox" required>
+                    I acknowledge that timeline and cost estimates will be provided after technical review
+                </label>
+                <label class="option-label ack-item">
+                    <input type="checkbox" required>
+                    I confirm that I have authority to submit this change request
+                </label>
+            </div>
+
+            <!-- Post Submission Info -->
+            <div class="post-info">
+                <div class="post-info-title">
+                    <i class="ri-time-line"></i> Next Steps
+                </div>
+                <div style="font-size: 14px; margin-bottom:8px;">After submission, you will receive:</div>
+                <ul class="post-info-list">
+                    <li>Confirmation email with CR number and status tracking link</li>
+                    <li>Initial technical review within 2 business days</li>
+                    <li>Detailed cost/effort estimate within 5 business days</li>
+                    <li>Implementation timeline upon formal approval</li>
+                </ul>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <button type="button" class="btn-link">Cancel</button>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-secondary">
+                        <i class="ri-save-line"></i> Save as Draft
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ri-send-plane-fill"></i> Submit Change Request
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>VentureCycle Studio © 2026</div>
+            <div class="footer-links">
+                <span>Questions? Contact: <a href="/cdn-cgi/l/email-protection#bfded7d2dadbffc9dad1cbcacddadcc6dcd3da91cccbcadbd6d0"><span class="__cf_email__" data-cfemail="91f0f9fcf4f5d1e7f4ffe5e4e3f4f2e8f2fdf4bfe2e5e4f5f8fe">[email&#160;protected]</span></a></span>
+                <a href="#">Change Request Process Documentation <i class="ri-external-link-line"></i></a>
+            </div>
+        </footer>
+
+        <!-- Auto Save Toast -->
+        <div class="auto-save">
+            <i class="ri-check-line"></i> Draft auto-saved 1 min ago
+        </div>
+
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

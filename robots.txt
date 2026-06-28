@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /templates/
+
+# AI Crawlers configuration
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://venturecycle.studio/sitemap.xml

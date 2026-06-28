@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=900, initial-scale=1.0">
+    <title>Service Level Agreement - VentureCycle Studio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Regular.otf') format('opentype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+
+        :root {
+            --primary: #1ABC9C;
+            --accent: #E6AA5B;
+            --text-main: #2D3436;
+            --bg-light: #F5F6FA;
+            --white: #FFFFFF;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'NotoSansHans', Arial, sans-serif;
+            width: 900px;
+            margin: 0 auto;
+            background-color: var(--white);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .document-container {
+            padding: 40px 60px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-meta {
+            font-size: 14px;
+            color: #636e72;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* Overview Section */
+        .overview-box {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .overview-header {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .parties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .party-block strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--bg-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            color: var(--text-main);
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 5px;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .two-col-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* Priority Tags */
+        .priority-p1 { color: #d63031; font-weight: bold; }
+        .priority-p2 { color: var(--accent); font-weight: bold; }
+        .priority-p3 { color: #0984e3; font-weight: bold; }
+        .priority-p4 { color: #00b894; font-weight: bold; }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background-color: #fff9f0;
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+
+        /* Signatures */
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .signature-block {
+            margin-bottom: 20px;
+        }
+
+        .sig-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--text-main);
+            margin-bottom: 10px;
+            height: 30px;
+        }
+
+        .sig-label {
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 15px;
+            display: flex;
+        }
+        .sig-label span {
+            width: 80px;
+        }
+
+        /* Footer */
+        .document-info {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: #636e72;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .confidentiality {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            font-style: italic;
+            color: #b2bec3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <!-- Header -->
+        <header>
+            <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo">
+            <h1>Service Level Agreement (SLA)</h1>
+            <div class="header-meta">
+                <span><i class="ri-file-text-line"></i> Version: 1.0</span>
+                <span><i class="ri-calendar-line"></i> Effective Date: March 15, 2026</span>
+            </div>
+        </header>
+
+        <!-- Agreement Overview -->
+        <div class="overview-box">
+            <div class="overview-header">This Service Level Agreement ("SLA") is entered into between:</div>
+            <div class="parties-grid">
+                <div class="party-block">
+                    <strong>Service Provider:</strong>
+                    VentureCycle Studio<br>
+                    Cairo, Egypt<br>
+                    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5130393c34351127343f252423343228323d347f22252435383e">[email&#160;protected]</a>
+                </div>
+                <div class="party-block">
+                    <strong>Client:</strong>
+                    [Client Company Name]<br>
+                    [Client Address]<br>
+                    [Client Contact]
+                </div>
+            </div>
+            <div class="terms-grid">
+                <div><strong>Agreement Term:</strong> 12 months from effective date</div>
+                <div><strong>Review Period:</strong> Quarterly</div>
+            </div>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section">
+            <h2><i class="ri-list-check"></i> 1. Service Description</h2>
+            <p>VentureCycle Studio will provide the following services:</p>
+            <div class="two-col-list">
+                <div>
+                    <h3>Services Covered:</h3>
+                    <ul>
+                        <li>AI automation system maintenance and support</li>
+                        <li>Technical troubleshooting and bug fixes</li>
+                        <li>Performance monitoring and optimization</li>
+                        <li>Security updates and patches</li>
+                        <li>System enhancements (as agreed)</li>
+                        <li>Technical consultation and guidance</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Services NOT Covered:</h3>
+                    <ul>
+                        <li>New feature development (requires separate agreement)</li>
+                        <li>Third-party software issues</li>
+                        <li>Hardware failures</li>
+                        <li>Issues caused by unauthorized modifications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+            <h2><i class="ri-time-line"></i> 2. Service Hours</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service Type</th>
+                        <th>Hours</th>
+                        <th>Time Zone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Standard Support</td>
+                        <td>Sunday-Thursday, 9:00 AM - 6:00 PM</td>
+                        <td>GMT+2</td>
+                    </tr>
+                    <tr>
+                        <td>Emergency Support</td>
+                        <td>24/7 for P1 issues</td>
+                        <td>GMT+2</td>
+                    </tr>
+                    <tr>
+                        <td>Planned Maintenance</td>
+                        <td>Saturdays, 2:00 AM - 6:00 AM</td>
+                        <td>GMT+2</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <strong><i class="ri-calendar-event-line"></i> Holidays:</strong> Egyptian national holidays (support limited to P1 issues)
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+            <h2><i class="ri-timer-flash-line"></i> 3. Response & Resolution Times</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Priority</th>
+                        <th>Description</th>
+                        <th>Response Time</th>
+                        <th>Resolution Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="priority-p1">P1 - Critical</td>
+                        <td>System down, critical functionality unavailable</td>
+                        <td>1 hour</td>
+                        <td>4 hours</td>
+                    </tr>
+                    <tr>
+                        <td class="priority-p2">P2 - High</td>
+                        <td>Major functionality impaired, no workaround</td>
+                        <td>4 hours</td>
+                        <td>24 hours</td>
+                    </tr>
+                    <tr>
+                        <td class="priority-p3">P3 - Medium</td>
+                        <td>Minor functionality issue, workaround available</td>
+                        <td>8 hours</td>
+                        <td>72 hours</td>
+                    </tr>
+                    <tr>
+                        <td class="priority-p4">P4 - Low</td>
+                        <td>General questions, feature requests</td>
+                        <td>24 hours</td>
+                        <td>5 business days</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Priority Definitions:</h3>
+            <ul>
+                <li><span class="priority-p1">P1 (Critical):</span> Production system completely unavailable or critical data loss</li>
+                <li><span class="priority-p2">P2 (High):</span> Major feature not working, significant business impact</li>
+                <li><span class="priority-p3">P3 (Medium):</span> Minor feature issue, minimal business impact</li>
+                <li><span class="priority-p4">P4 (Low):</span> Cosmetic issues, questions, enhancement requests</li>
+            </ul>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+            <h2><i class="ri-dashboard-line"></i> 4. Performance Metrics</h2>
+            
+            <h3>Uptime Guarantee: <span style="color: var(--primary);">99.5% monthly uptime</span></h3>
+            <ul>
+                <li>Measured monthly</li>
+                <li>Excludes planned maintenance windows</li>
+                <li>Credits applied if not met</li>
+            </ul>
+
+            <div class="two-col-list">
+                <div>
+                    <h3>Performance Benchmarks:</h3>
+                    <ul>
+                        <li>API response time: &lt; 500ms (95th percentile)</li>
+                        <li>Page load time: &lt; 2 seconds</li>
+                        <li>Database query time: &lt; 200ms average</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="highlight-box" style="margin-top: 40px;">
+                        <strong>Availability Target:</strong><br>
+                        99.5% = Maximum 3.6 hours downtime per month
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+            <h2><i class="ri-customer-service-2-line"></i> 5. Support Channels</h2>
+            <div class="two-col-list">
+                <div>
+                    <h3>Primary Contact Methods:</h3>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="36454346465944427640535842434453554f555a5318454243525f59">[email&#160;protected]</a> (P2-P4)</li>
+                        <li><strong>Phone:</strong> +201501656010 (P1-P2)</li>
+                        <li><strong>Support Portal:</strong> support.venturecycle.studio (All priorities)</li>
+                        <li><strong>Emergency Hotline:</strong> +201501656010 (P1 only, 24/7)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Escalation Path:</h3>
+                    <ul>
+                        <li><strong>Level 1:</strong> Support Engineer (Initial contact)</li>
+                        <li><strong>Level 2:</strong> Senior Engineer (If unresolved in 2 hours for P1)</li>
+                        <li><strong>Level 3:</strong> Project Manager - VentureCycle Studio (If unresolved in 4 hours for P1)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section">
+            <h2><i class="ri-scales-line"></i> 6. Responsibilities</h2>
+            <div class="two-col-list">
+                <div>
+                    <h3>VentureCycle Studio Will:</h3>
+                    <ul>
+                        <li>Monitor system performance 24/7</li>
+                        <li>Respond within committed timeframes</li>
+                        <li>Provide regular system updates</li>
+                        <li>Conduct monthly performance reviews</li>
+                        <li>Maintain system documentation</li>
+                        <li>Implement security patches promptly</li>
+                        <li>Provide monthly SLA reports</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Client Will:</h3>
+                    <ul>
+                        <li>Report issues through designated channels</li>
+                        <li>Provide accurate issue descriptions</li>
+                        <li>Grant necessary system access</li>
+                        <li>Designate primary contact person</li>
+                        <li>Respond to information requests within 24 hours</li>
+                        <li>Maintain current contact information</li>
+                        <li>Participate in monthly review meetings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section">
+            <h2><i class="ri-bar-chart-box-line"></i> 7. Reporting & Reviews</h2>
+            <div class="two-col-list">
+                <div>
+                    <h3>Monthly Reports Include:</h3>
+                    <ul>
+                        <li>Uptime statistics</li>
+                        <li>Incident summary and resolution times</li>
+                        <li>Performance metrics</li>
+                        <li>Planned maintenance schedule</li>
+                        <li>Recommendations for improvements</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Quarterly Business Reviews:</h3>
+                    <ul>
+                        <li>SLA performance review</li>
+                        <li>Service improvement discussions</li>
+                        <li>Upcoming enhancements</li>
+                        <li>Feedback and adjustments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="section">
+            <h2><i class="ri-file-shield-2-line"></i> 8. Terms & Conditions</h2>
+            <div style="font-size: 14px;">
+                <h3>Service Credits:</h3>
+                <p>If monthly uptime falls below 99.5%, client receives service credits:</p>
+                <ul>
+                    <li>99.0% - 99.4%: 10% monthly fee credit</li>
+                    <li>98.0% - 98.9%: 25% monthly fee credit</li>
+                    <li>Below 98.0%: 50% monthly fee credit</li>
+                </ul>
+
+                <h3>Exclusions from SLA:</h3>
+                <ul>
+                    <li>Scheduled maintenance (with 48-hour notice)</li>
+                    <li>Client-caused issues</li>
+                    <li>Force majeure events</li>
+                    <li>Third-party service failures</li>
+                    <li>Issues outside VentureCycle's control</li>
+                </ul>
+
+                <h3>Amendments & Termination:</h3>
+                <p><strong>Amendments:</strong> This SLA may be amended with 30 days written notice to both parties.<br>
+                <strong>Termination:</strong> Either party may terminate with 60 days written notice. Client remains responsible for fees during notice period.</p>
+            </div>
+        </div>
+
+        <!-- Signatures -->
+        <div class="signatures">
+            <div class="signature-block">
+                <div class="sig-title">Service Provider:</div>
+                <div class="sig-line"></div>
+                <div class="sig-label"><span>Signature:</span> _____________________</div>
+                <div class="sig-label"><span>Name:</span> VentureCycle Studio</div>
+                <div class="sig-label"><span>Title:</span> Founder, VentureCycle Studio</div>
+                <div class="sig-label"><span>Date:</span> _____________________</div>
+            </div>
+            <div class="signature-block">
+                <div class="sig-title">Client:</div>
+                <div class="sig-line"></div>
+                <div class="sig-label"><span>Signature:</span> _____________________</div>
+                <div class="sig-label"><span>Name:</span> _____________________</div>
+                <div class="sig-label"><span>Title:</span> _____________________</div>
+                <div class="sig-label"><span>Date:</span> _____________________</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="document-info">
+            <div>
+                <strong>Document Information:</strong><br>
+                SLA Reference: VC-SLA-2026-001<br>
+                Version: 1.0
+            </div>
+            <div style="text-align: right;">
+                <br>
+                Effective Date: March 15, 2026<br>
+                Next Review: June 15, 2026
+            </div>
+        </div>
+        
+        <div class="confidentiality">
+            This document contains confidential information. Unauthorized distribution is prohibited.
+        </div>
+
+    </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

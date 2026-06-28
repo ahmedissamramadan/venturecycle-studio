@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureCycle Studio Letterhead</title>
+    <style>
+        /* Import Google Fonts for better typography */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cairo:wght@400;600;700&display=swap');
+
+        /* Base setup to enforce Expected Width of 794px for the final image rendering */
+        :root {
+            --brand-turquoise: #1ABC9C;
+            --brand-dark-gray: #2D3436;
+            --brand-medium-gray: #636E72;
+            --brand-light-gray: #DFE6E9;
+            --brand-white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 794px; /* Strictly A4 width at 96 DPI approx */
+            min-height: 1123px; /* Strictly A4 height at 96 DPI approx */
+            background-color: #f0f0f0; /* Outer background to see the page in browser */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif, 'Cairo';
+        }
+
+        /* The actual A4 page container */
+        .page {
+            width: 794px; /* Exact width required */
+            height: 1123px; /* Exact height */
+            background-color: var(--brand-white);
+            box-sizing: border-box;
+            position: relative;
+            padding: 20mm; /* 20mm print-safe margins */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            height: 40mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            margin-bottom: 15mm;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--brand-dark-gray);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: var(--brand-medium-gray);
+            margin: 2px 0 0 0;
+            font-weight: 400;
+        }
+
+        .header-accent {
+            width: 100%;
+            height: 2px;
+            background-color: var(--brand-turquoise);
+            margin-top: 15px;
+        }
+
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            font-size: 11pt;
+            color: var(--brand-dark-gray);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content h1, .content h2, .content h3 {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--brand-dark-gray);
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .content p {
+            margin: 0 0 15px 0;
+        }
+
+        .letter-meta {
+            margin-bottom: 30px;
+        }
+
+        .signature-area {
+            margin-top: 40px;
+        }
+
+        /* Footer Section */
+        .footer {
+            height: 30mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .footer-accent {
+            width: 100%;
+            height: 2px;
+            background-color: var(--brand-turquoise);
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            font-size: 9px;
+            color: var(--brand-medium-gray);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .contact-item {
+            display: inline-block;
+        }
+
+        .contact-separator {
+            margin: 0 8px;
+            color: var(--brand-light-gray);
+        }
+
+        /* Geometric pattern accent */
+        .pattern-accent {
+            position: absolute;
+            bottom: -5mm;
+            right: -5mm;
+            width: 100px;
+            height: 100px;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(45deg, var(--brand-turquoise) 25%, transparent 25%, transparent 75%, var(--brand-turquoise) 75%, var(--brand-turquoise)),
+                linear-gradient(45deg, var(--brand-turquoise) 25%, transparent 25%, transparent 75%, var(--brand-turquoise) 75%, var(--brand-turquoise));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            z-index: 1;
+            border-top-left-radius: 50%;
+        }
+
+        /* Print optimization */
+        @media print {
+            body {
+                background-color: transparent;
+                width: 100%;
+                height: 100%;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 20mm;
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+            }
+            /* Adjust colors for pure B&W print if needed, but keeping brand colors as requested */
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+        
+        /* RTL Support */
+        [dir="rtl"] .header-content {
+            flex-direction: row-reverse;
+        }
+        [dir="rtl"] .content {
+            text-align: right;
+        }
+    </style>
+</head>
+<body dir="ltr">
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <!-- LOGO: Replace src with your logo URL -->
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo-img">
+                <div class="brand-info">
+                    <h1 class="company-name">VentureCycle Studio</h1>
+                    <p class="tagline">AI-Powered Automation for the MENA Region</p>
+                </div>
+            </div>
+            <div class="header-accent"></div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            <div class="letter-meta">
+                <p><strong>Date:</strong> October 24, 2023</p>
+                <br>
+                <p>
+                    <strong>Recipient Name</strong><br>
+                    Recipient Title<br>
+                    Company Name<br>
+                    Address Line 1<br>
+                    City, State, Zip Code
+                </p>
+            </div>
+
+            <p>Dear [Recipient Name],</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+
+            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+
+            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+
+            <div class="signature-area">
+                <p>Sincerely,</p>
+                <br><br><br>
+                <p>
+                    <strong>VentureCycle Studio</strong><br>
+                    Founder & CEO<br>
+                    VentureCycle Studio
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-accent"></div>
+            <div class="contact-info">
+                <span class="contact-item"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c3d343139381c2a393228292e393f253f3039722f2829383533">[email&#160;protected]</a></span>
+                <span class="contact-separator">|</span>
+                <span class="contact-item">+201501656010</span>
+                <span class="contact-separator">|</span>
+                <span class="contact-item">venturecycle.studio</span>
+                <span class="contact-separator">|</span>
+                <span class="contact-item">Cairo, Egypt</span>
+            </div>
+            <div class="pattern-accent"></div>
+        </div>
+    </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

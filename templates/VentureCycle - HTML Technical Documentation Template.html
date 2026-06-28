@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1000, initial-scale=1.0">
+    <title>Technical Documentation - VentureCycle Studio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1ABC9C;
+            --primary-dark: #16a085;
+            --dark: #2D3436;
+            --light: #F5F6FA;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #E0E0E0;
+            --sidebar-width: 250px;
+        }
+
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Semibold.ttf') format('truetype');
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 1000px;
+            font-family: 'MiSans', sans-serif;
+            background-color: #ffffff;
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--light);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+
+        .sidebar-logo div {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        .search-box {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'MiSans', sans-serif;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.2);
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+            background-color: rgba(26, 188, 156, 0.05);
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+            background-color: rgba(26, 188, 156, 0.1);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: var(--sidebar-width);
+            padding: 40px 60px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        .header-meta {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-meta-left h1 {
+            margin: 0 0 5px 0;
+            font-size: 28px;
+            color: var(--dark);
+        }
+
+        .header-meta-left p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .header-meta-right {
+            text-align: right;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .header-meta-right .badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* Content Sections */
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: var(--dark);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: var(--primary);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 18px;
+            color: var(--dark);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            line-height: 1.6;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Code Blocks */
+        .code-container {
+            background-color: var(--dark);
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            font-size: 12px;
+            color: #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .copy-btn:hover {
+            color: white;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: #E0E0E0;
+            line-height: 1.5;
+        }
+
+        /* Syntax Highlighting */
+        .kw { color: #c678dd; } /* Keyword */
+        .str { color: #98c379; } /* String */
+        .num { color: #d19a66; } /* Number */
+        .cmt { color: #5c6370; font-style: italic; } /* Comment */
+        .fun { color: #61afef; } /* Function */
+        .var { color: #e06c75; } /* Variable */
+        .punc { color: #abb2bf; } /* Punctuation */
+
+        /* Inline Code */
+        :not(pre) > code {
+            background-color: var(--light);
+            color: #e06c75;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .callout i {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .callout-info {
+            background-color: rgba(26, 188, 156, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .callout-info i {
+            color: var(--primary);
+        }
+
+        .callout-content h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .callout-content p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Endpoints */
+        .endpoint {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .endpoint-header {
+            background-color: var(--light);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .method {
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .method.get { background-color: #61afef; }
+        .method.post { background-color: var(--primary); }
+        .method.put { background-color: #d19a66; }
+        .method.delete { background-color: #e06c75; }
+
+        .path {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .endpoint-desc {
+            padding: 10px 15px;
+            font-size: 14px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            background-color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="../assets/p-vc.png" alt="VentureCycle Logo">
+            <div>VentureCycle Studio</div>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search documentation...">
+        </div>
+
+        <ul class="nav-list">
+            <li><a href="#overview" class="nav-item active">1. Overview</a></li>
+            <li><a href="#architecture" class="nav-item">2. System Architecture</a></li>
+            <li><a href="#installation" class="nav-item">3. Installation</a></li>
+            <li><a href="#configuration" class="nav-item">4. Configuration</a></li>
+            <li><a href="#api" class="nav-item">5. API Documentation</a></li>
+            <li><a href="#database" class="nav-item">6. Database Schema</a></li>
+            <li><a href="#deployment" class="nav-item">7. Deployment</a></li>
+            <li><a href="#maintenance" class="nav-item">8. Maintenance</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+        
+        <div class="header-meta">
+            <div class="header-meta-left">
+                <h1>Technical Documentation</h1>
+                <p>Project: AI Automation System</p>
+            </div>
+            <div class="header-meta-right">
+                <span class="badge">v1.0.0</span><br>
+                Last Updated: March 15, 2026
+            </div>
+        </div>
+
+        <!-- 1. Overview -->
+        <section id="overview">
+            <h2>1. Overview</h2>
+            
+            <h3>Project Description</h3>
+            <p>AI-powered automation system designed for MENA businesses, featuring Arabic language support, workflow automation, and intelligent process optimization.</p>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li>Custom AI workflow engine</li>
+                <li>Arabic NLP capabilities</li>
+                <li>Real-time data processing</li>
+                <li>RESTful API</li>
+                <li>Cloud-native architecture</li>
+                <li>Scalable microservices</li>
+            </ul>
+
+            <h3>Technology Stack</h3>
+            <ul>
+                <li><strong>Backend:</strong> Python 3.11, FastAPI</li>
+                <li><strong>Frontend:</strong> React 18, TypeScript</li>
+                <li><strong>Database:</strong> PostgreSQL 15, Redis</li>
+                <li><strong>AI/ML:</strong> TensorFlow, Hugging Face Transformers</li>
+                <li><strong>Infrastructure:</strong> AWS (ECS, RDS, S3)</li>
+                <li><strong>CI/CD:</strong> GitHub Actions</li>
+            </ul>
+        </section>
+
+        <!-- 2. System Architecture -->
+        <section id="architecture">
+            <h2>2. System Architecture</h2>
+            
+            <h3>Architecture Overview</h3>
+            <p>Microservices-based architecture with API gateway, authentication service, automation engine, and data processing pipeline.</p>
+
+            <h3>Components</h3>
+            <ul>
+                <li>API Gateway (Kong)</li>
+                <li>Authentication Service (OAuth 2.0)</li>
+                <li>Automation Engine (Core service)</li>
+                <li>NLP Service (Arabic language processing)</li>
+                <li>Database Layer (PostgreSQL + Redis)</li>
+                <li>Message Queue (RabbitMQ)</li>
+                <li>Storage (AWS S3)</li>
+            </ul>
+        </section>
+
+        <!-- 3. Installation -->
+        <section id="installation">
+            <h2>3. Installation</h2>
+            
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Python 3.11+</li>
+                <li>Node.js 18+</li>
+                <li>PostgreSQL 15+</li>
+                <li>Redis 7+</li>
+                <li>Docker & Docker Compose</li>
+            </ul>
+
+            <h3>Installation Steps</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>bash</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="cmt"># Clone repository</span>
+<span class="fun">git</span> clone https://github.com/venturecycle/ai-automation.git
+<span class="fun">cd</span> ai-automation
+
+<span class="cmt"># Install backend dependencies</span>
+<span class="fun">pip</span> install -r requirements.txt
+
+<span class="cmt"># Install frontend dependencies</span>
+<span class="fun">cd</span> frontend
+<span class="fun">npm</span> install
+
+<span class="cmt"># Set up database</span>
+<span class="fun">createdb</span> automation_db
+<span class="fun">python</span> manage.py migrate
+
+<span class="cmt"># Start services</span>
+<span class="fun">docker-compose</span> up -d</code></pre>
+            </div>
+        </section>
+
+        <!-- 4. Configuration -->
+        <section id="configuration">
+            <h2>4. Configuration</h2>
+            
+            <h3>Environment Variables</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>bash (.env)</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="cmt"># Database</span>
+<span class="var">DATABASE_URL</span>=<span class="str">postgresql://user:pass@localhost:5432/automation_db</span>
+<span class="var">REDIS_URL</span>=<span class="str">redis://localhost:6379/0</span>
+
+<span class="cmt"># API Keys</span>
+<span class="var">OPENAI_API_KEY</span>=<span class="str">your_key_here</span>
+<span class="var">AWS_ACCESS_KEY_ID</span>=<span class="str">your_key_here</span>
+<span class="var">AWS_SECRET_ACCESS_KEY</span>=<span class="str">your_secret_here</span>
+
+<span class="cmt"># Application</span>
+<span class="var">DEBUG</span>=<span class="str">False</span>
+<span class="var">SECRET_KEY</span>=<span class="str">your_secret_key</span>
+<span class="var">ALLOWED_HOSTS</span>=<span class="str">localhost,api.venturecycle.studio</span></code></pre>
+            </div>
+
+            <h3>Configuration File (config.yaml)</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>yaml</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="var">app</span><span class="punc">:</span>
+  <span class="var">name</span><span class="punc">:</span> <span class="str">VentureCycle AI Automation</span>
+  <span class="var">version</span><span class="punc">:</span> <span class="str">1.0.0</span>
+  <span class="var">environment</span><span class="punc">:</span> <span class="str">production</span>
+
+<span class="var">database</span><span class="punc">:</span>
+  <span class="var">host</span><span class="punc">:</span> <span class="str">localhost</span>
+  <span class="var">port</span><span class="punc">:</span> <span class="num">5432</span>
+  <span class="var">name</span><span class="punc">:</span> <span class="str">automation_db</span>
+  <span class="var">pool_size</span><span class="punc">:</span> <span class="num">20</span>
+
+<span class="var">redis</span><span class="punc">:</span>
+  <span class="var">host</span><span class="punc">:</span> <span class="str">localhost</span>
+  <span class="var">port</span><span class="punc">:</span> <span class="num">6379</span>
+  <span class="var">db</span><span class="punc">:</span> <span class="num">0</span>
+
+<span class="var">api</span><span class="punc">:</span>
+  <span class="var">rate_limit</span><span class="punc">:</span> <span class="num">100</span>
+  <span class="var">timeout</span><span class="punc">:</span> <span class="num">30</span></code></pre>
+            </div>
+        </section>
+
+        <!-- 5. API Documentation -->
+        <section id="api">
+            <h2>5. API Documentation</h2>
+            
+            <div class="callout callout-info">
+                <i class="ri-information-line"></i>
+                <div class="callout-content">
+                    <h4>Authentication</h4>
+                    <p>All API requests require Bearer token authentication.</p>
+                </div>
+            </div>
+
+            <h3>Login Request</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>http</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="kw">POST</span> <span class="str">/api/v1/auth/login</span>
+<span class="var">Content-Type</span><span class="punc">:</span> <span class="str">application/json</span>
+
+<span class="punc">{</span>
+  <span class="var">"email"</span><span class="punc">:</span> <span class="str">"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b1e180e192b0e130a061b070e45080406">[email&#160;protected]</a>"</span><span class="punc">,</span>
+  <span class="var">"password"</span><span class="punc">:</span> <span class="str">"password123"</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3>Login Response</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>json</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="punc">{</span>
+  <span class="var">"access_token"</span><span class="punc">:</span> <span class="str">"eyJhbGciOiJIUzI1NiIs..."</span><span class="punc">,</span>
+  <span class="var">"token_type"</span><span class="punc">:</span> <span class="str">"bearer"</span><span class="punc">,</span>
+  <span class="var">"expires_in"</span><span class="punc">:</span> <span class="num">3600</span>
+<span class="punc">}</span></code></pre>
+            </div>
+
+            <h3>Endpoints</h3>
+            
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/v1/workflows</span>
+                </div>
+                <div class="endpoint-desc">List all automation workflows</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/v1/workflows</span>
+                </div>
+                <div class="endpoint-desc">Create new workflow</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/v1/workflows/{id}</span>
+                </div>
+                <div class="endpoint-desc">Get workflow details</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method put">PUT</span>
+                    <span class="path">/api/v1/workflows/{id}</span>
+                </div>
+                <div class="endpoint-desc">Update workflow</div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method delete">DELETE</span>
+                    <span class="path">/api/v1/workflows/{id}</span>
+                </div>
+                <div class="endpoint-desc">Delete workflow</div>
+            </div>
+
+            <h3>Error Codes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>200</td><td>Success</td></tr>
+                    <tr><td>201</td><td>Created</td></tr>
+                    <tr><td>400</td><td>Bad Request</td></tr>
+                    <tr><td>401</td><td>Unauthorized</td></tr>
+                    <tr><td>403</td><td>Forbidden</td></tr>
+                    <tr><td>404</td><td>Not Found</td></tr>
+                    <tr><td>500</td><td>Internal Server Error</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 6. Database Schema -->
+        <section id="database">
+            <h2>6. Database Schema</h2>
+            
+            <h3>Users Table</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>sql</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="kw">CREATE TABLE</span> <span class="fun">users</span> (
+    id <span class="kw">SERIAL PRIMARY KEY</span>,
+    email <span class="kw">VARCHAR</span>(255) <span class="kw">UNIQUE NOT NULL</span>,
+    password_hash <span class="kw">VARCHAR</span>(255) <span class="kw">NOT NULL</span>,
+    full_name <span class="kw">VARCHAR</span>(255),
+    created_at <span class="kw">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>,
+    updated_at <span class="kw">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
+);</code></pre>
+            </div>
+
+            <h3>Workflows Table</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>sql</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="kw">CREATE TABLE</span> <span class="fun">workflows</span> (
+    id <span class="kw">SERIAL PRIMARY KEY</span>,
+    user_id <span class="kw">INTEGER REFERENCES</span> <span class="fun">users</span>(id),
+    name <span class="kw">VARCHAR</span>(255) <span class="kw">NOT NULL</span>,
+    description <span class="kw">TEXT</span>,
+    config <span class="kw">JSONB</span>,
+    status <span class="kw">VARCHAR</span>(50),
+    created_at <span class="kw">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>,
+    updated_at <span class="kw">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
+);</code></pre>
+            </div>
+        </section>
+
+        <!-- 7. Deployment -->
+        <section id="deployment">
+            <h2>7. Deployment</h2>
+            
+            <h3>Production Deployment</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>bash</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="cmt"># Build Docker images</span>
+<span class="fun">docker</span> build -t venturecycle/api:latest .
+
+<span class="cmt"># Push to registry</span>
+<span class="fun">docker</span> push venturecycle/api:latest
+
+<span class="cmt"># Deploy to AWS ECS</span>
+<span class="fun">aws</span> ecs update-service --cluster prod --service api --force-new-deployment
+
+<span class="cmt"># Run database migrations</span>
+<span class="fun">python</span> manage.py migrate --settings=config.production</code></pre>
+            </div>
+
+            <h3>Environment Setup</h3>
+            <ul>
+                <li><strong>Production:</strong> AWS ECS + RDS</li>
+                <li><strong>Staging:</strong> AWS ECS + RDS (smaller instances)</li>
+                <li><strong>Development:</strong> Local Docker Compose</li>
+            </ul>
+        </section>
+
+        <!-- 8. Maintenance -->
+        <section id="maintenance">
+            <h2>8. Maintenance</h2>
+            
+            <h3>Backup Procedures</h3>
+            <div class="code-container">
+                <div class="code-header">
+                    <span>bash</span>
+                    <button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button>
+                </div>
+                <pre><code><span class="cmt"># Database backup</span>
+<span class="fun">pg_dump</span> automation_db > backup_$(date +%Y%m%d).sql
+
+<span class="cmt"># Upload to S3</span>
+<span class="fun">aws</span> s3 cp backup_$(date +%Y%m%d).sql s3://venturecycle-backups/</code></pre>
+            </div>
+
+            <h3>Monitoring</h3>
+            <ul>
+                <li><strong>Application logs:</strong> CloudWatch</li>
+                <li><strong>Performance metrics:</strong> DataDog</li>
+                <li><strong>Error tracking:</strong> Sentry</li>
+                <li><strong>Uptime monitoring:</strong> Pingdom</li>
+            </ul>
+
+            <h3>Common Issues</h3>
+            <div class="callout callout-info">
+                <i class="ri-error-warning-line"></i>
+                <div class="callout-content">
+                    <h4>Issue: High memory usage</h4>
+                    <p><strong>Solution:</strong> Increase Redis memory limit, optimize queries</p>
+                </div>
+            </div>
+            <div class="callout callout-info">
+                <i class="ri-timer-line"></i>
+                <div class="callout-content">
+                    <h4>Issue: Slow API responses</h4>
+                    <p><strong>Solution:</strong> Check database indexes, enable caching</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>
+                Version: 1.0.0 | Last Updated: March 15, 2026
+            </div>
+            <div>
+                Maintained by: VentureCycle Studio | Contact: <a href="/cdn-cgi/l/email-protection#89e8e1e4ecedc9ffece7fdfcfbeceaf0eae5eca7fafdfcede0e6"><span class="__cf_email__" data-cfemail="37565f5a52537741525943424552544e545b5219444342535e58">[email&#160;protected]</span></a>
+            </div>
+        </footer>
+
+    </main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

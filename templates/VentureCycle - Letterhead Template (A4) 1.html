@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureCycle Studio Letterhead</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cairo:wght@400;500;600&display=swap');
+
+        :root {
+            --primary: #1ABC9C;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg-color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0; /* Just to see the A4 limits on screen */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* A4 Page Setup */
+        .page {
+            width: 794px; /* A4 width */
+            min-height: 1123px; /* A4 height */
+            background-color: var(--bg-color);
+            padding: 75.5px; /* ~20mm margin (20mm = 75.59px at 96dpi) */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Screen shadow */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            margin-right: 15px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .company-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            font-size: 11pt; /* ~14.6px */
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .content p {
+            margin-bottom: 1em;
+        }
+
+        /* Date and Salutation placeholders */
+        .meta-info {
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+
+        .salutation {
+            margin-bottom: 20px;
+        }
+
+        /* Footer Section */
+        .footer {
+            margin-top: auto; /* Push to bottom */
+            padding-top: 15px;
+            border-top: 2px solid var(--primary);
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-info {
+            font-size: 9px;
+            color: var(--text-light);
+        }
+
+        .contact-info span {
+            margin: 0 5px;
+        }
+
+        .contact-info span:not(:last-child)::after {
+            content: '|';
+            margin-left: 10px;
+            color: var(--primary);
+        }
+
+        /* Subtle Geometric Pattern - using CSS repeating gradients for a light pattern */
+        .geometric-accent {
+            position: absolute;
+            bottom: -20px; /* Shift to fit within the bottom margin area if needed, but keeping it inside footer */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 10px;
+            background: linear-gradient(135deg, var(--primary) 25%, transparent 25%) -5px 0,
+                        linear-gradient(225deg, var(--primary) 25%, transparent 25%) -5px 0,
+                        linear-gradient(315deg, var(--primary) 25%, transparent 25%),
+                        linear-gradient(45deg, var(--primary) 25%, transparent 25%);
+            background-size: 10px 10px;
+            opacity: 0.15;
+            margin-top: 15px;
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                background-color: transparent;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 20mm; /* Use precise mm for print */
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+            }
+            /* Hide URL printing */
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-container">
+                <!-- LOGO: Replace src="LOGO_URL_HERE" -->
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo" />
+            </div>
+            <div class="company-info">
+                <h1 class="company-name">VentureCycle Studio</h1>
+                <p class="tagline">AI-Powered Automation for the MENA Region</p>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="content">
+            <div class="meta-info">
+                [Date]<br>
+                <br>
+                [Recipient Name]<br>
+                [Recipient Title]<br>
+                [Company Name]<br>
+                [Address Line 1]<br>
+                [Address Line 2]
+            </div>
+
+            <div class="salutation">
+                Dear [Recipient Name],
+            </div>
+
+            <p>We are writing to introduce VentureCycle Studio's innovative AI-driven solutions tailored specifically for the unique demands of the MENA market. Our focus on leveraging cutting-edge automation technologies allows businesses to streamline their operations, reduce overhead, and scale efficiently.</p>
+            
+            <p>The enclosed proposal outlines a comprehensive strategy to integrate intelligent workflows into your existing infrastructure. By adopting these systems, we project a significant increase in operational throughput while maintaining the highest standards of accuracy and reliability.</p>
+
+            <p>Please review the attached documents at your earliest convenience. We are eager to discuss how our customized solutions can directly address your current challenges and align with your long-term strategic goals.</p>
+
+            <p>Thank you for considering VentureCycle Studio as your technology partner.</p>
+
+            <div class="sign-off" style="margin-top: 40px;">
+                Sincerely,<br>
+                <br><br><br>
+                VentureCycle Studio<br>
+                Founder & Lead Engineer<br>
+                VentureCycle Studio
+            </div>
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="contact-info">
+                <!-- Contact Email -->
+                <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8feee7e2eaebcff9eae1fbfafdeaecf6ece3eaa1fcfbfaebe6e0">[email&#160;protected]</a></span>
+                <!-- Contact Phone -->
+                <span>+201501656010</span>
+                <!-- Website -->
+                <span>venturecycle.studio</span>
+                <!-- Location -->
+                <span>Cairo, Egypt</span>
+            </div>
+            <div class="geometric-accent"></div>
+        </footer>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

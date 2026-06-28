@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Notes - VentureCycle Studio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Regular.otf') format('opentype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Medium.otf') format('opentype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'NotoSansHans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+
+        :root {
+            --primary: #1ABC9C;
+            --text-dark: #2D3436;
+            --bg-light: #F5F6FA;
+            --border-color: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'NotoSansHans', sans-serif;
+            color: var(--text-dark);
+            background-color: #E5E7EB;
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .document-container {
+            width: 900px;
+            background-color: #FFFFFF;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            padding: 40px 50px 30px;
+            border-bottom: 4px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+        }
+
+        .company-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .doc-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .doc-date {
+            font-size: 14px;
+            color: #64748B;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 40px 50px;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            font-size: 20px;
+        }
+
+        /* Meeting Details */
+        .details-box {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 25px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            row-gap: 12px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #64748B;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            font-size: 15px;
+        }
+
+        .attendees-list {
+            list-style: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #CBD5E1;
+        }
+
+        .attendees-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .attendees-list li i {
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        /* Lists */
+        .agenda-list, .notes-list, .next-steps-list {
+            padding-left: 5px;
+            list-style: none;
+        }
+
+        .agenda-item {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .agenda-num {
+            font-weight: bold;
+            color: var(--primary);
+            width: 25px;
+        }
+
+        .agenda-text {
+            flex-grow: 1;
+        }
+
+        .agenda-time {
+            color: #64748B;
+            font-size: 13px;
+            background: var(--bg-light);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        /* Notes Section */
+        .note-topic {
+            margin-bottom: 20px;
+        }
+
+        .note-topic-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .note-topic ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .note-topic li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14.5px;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .note-topic li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 5px;
+        }
+
+        /* Table */
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14.5px;
+        }
+
+        .action-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 500;
+        }
+
+        .action-table th:first-child { border-top-left-radius: 6px; }
+        .action-table th:last-child { border-top-right-radius: 6px; }
+
+        .action-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .action-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-pending { background-color: #FEF3C7; color: #D97706; }
+        .status-progress { background-color: #DBEAFE; color: #2563EB; }
+
+        /* Decisions Box */
+        .decisions-box {
+            background-color: rgba(26, 188, 156, 0.05);
+            border: 1px solid rgba(26, 188, 156, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .decisions-box ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .decisions-box li {
+            margin-bottom: 8px;
+            font-size: 14.5px;
+            color: #334155;
+            padding-left: 5px;
+        }
+
+        .decisions-box li::marker {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-light);
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #64748B;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo">
+            <div class="company-name">VentureCycle Studio</div>
+        </div>
+        <div class="header-right">
+            <div class="doc-title">Meeting Notes</div>
+            <div class="doc-date">March 15, 2026</div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Details Section -->
+        <div class="section">
+            <div class="details-box">
+                <div class="detail-grid">
+                    <div class="detail-label">Subject:</div>
+                    <div class="detail-value" style="font-weight: bold;">AI Automation Project Kickoff</div>
+                    
+                    <div class="detail-label">Date & Time:</div>
+                    <div class="detail-value">March 15, 2026 | 10:00 AM - 11:30 AM (GMT+2)</div>
+                    
+                    <div class="detail-label">Location:</div>
+                    <div class="detail-value">Virtual (Zoom)</div>
+                </div>
+                
+                <ul class="attendees-list">
+                    <div class="detail-label" style="margin-bottom: 10px;">Attendees:</div>
+                    <li><i class="ri-user-star-line"></i> VentureCycle Studio (VentureCycle Studio)</li>
+                    <li><i class="ri-user-line"></i> [Client Name] (Client Company)</li>
+                    <li><i class="ri-user-line"></i> [Team Member 1]</li>
+                    <li><i class="ri-user-line"></i> [Team Member 2]</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Agenda Section -->
+        <div class="section">
+            <div class="section-title"><i class="ri-list-check"></i> Agenda</div>
+            <div class="agenda-list">
+                <div class="agenda-item">
+                    <span class="agenda-num">1.</span>
+                    <span class="agenda-text">Project overview and objectives</span>
+                    <span class="agenda-time">15 min</span>
+                </div>
+                <div class="agenda-item">
+                    <span class="agenda-num">2.</span>
+                    <span class="agenda-text">Technical requirements discussion</span>
+                    <span class="agenda-time">30 min</span>
+                </div>
+                <div class="agenda-item">
+                    <span class="agenda-num">3.</span>
+                    <span class="agenda-text">Timeline and milestones</span>
+                    <span class="agenda-time">20 min</span>
+                </div>
+                <div class="agenda-item">
+                    <span class="agenda-num">4.</span>
+                    <span class="agenda-text">Next steps and action items</span>
+                    <span class="agenda-time">10 min</span>
+                </div>
+                <div class="agenda-item">
+                    <span class="agenda-num">5.</span>
+                    <span class="agenda-text">Q&A</span>
+                    <span class="agenda-time">15 min</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discussion Notes Section -->
+        <div class="section">
+            <div class="section-title"><i class="ri-file-text-line"></i> Discussion Notes</div>
+            
+            <div class="note-topic">
+                <div class="note-topic-title">1. Project Overview:</div>
+                <ul>
+                    <li>Discussed client's current workflow challenges</li>
+                    <li>Identified key pain points in manual processes</li>
+                    <li>Agreed on primary automation goals</li>
+                    <li>Reviewed expected outcomes and success metrics</li>
+                </ul>
+            </div>
+
+            <div class="note-topic">
+                <div class="note-topic-title">2. Technical Requirements:</div>
+                <ul>
+                    <li>System must integrate with existing CRM</li>
+                    <li>Arabic language support required</li>
+                    <li>Cloud-based deployment preferred</li>
+                    <li>Real-time data processing needed</li>
+                    <li>Security and compliance requirements discussed</li>
+                </ul>
+            </div>
+
+            <div class="note-topic">
+                <div class="note-topic-title">3. Timeline:</div>
+                <ul>
+                    <li>Project duration: 12 weeks</li>
+                    <li>Phase 1 (Discovery): Weeks 1-2</li>
+                    <li>Phase 2 (Development): Weeks 3-10</li>
+                    <li>Phase 3 (Testing & Deployment): Weeks 11-12</li>
+                    <li>Go-live target: June 2026</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Action Items Section -->
+        <div class="section">
+            <div class="section-title"><i class="ri-task-line"></i> Action Items</div>
+            <table class="action-table">
+                <thead>
+                    <tr>
+                        <th>Action Item</th>
+                        <th style="width: 20%;">Assigned To</th>
+                        <th style="width: 15%;">Due Date</th>
+                        <th style="width: 15%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Provide API documentation</td>
+                        <td>Client Team</td>
+                        <td>March 20</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>Prepare technical architecture</td>
+                        <td>Ahmed</td>
+                        <td>March 22</td>
+                        <td><span class="status-badge status-progress">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td>Schedule requirements workshop</td>
+                        <td>Both</td>
+                        <td>March 18</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                    </tr>
+                    <tr>
+                        <td>Review and sign proposal</td>
+                        <td>Client</td>
+                        <td>March 17</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Key Decisions Section -->
+        <div class="section">
+            <div class="section-title"><i class="ri-lightbulb-flash-line"></i> Key Decisions</div>
+            <div class="decisions-box">
+                <ol>
+                    <li>Project will use cloud-based infrastructure (AWS)</li>
+                    <li>Weekly progress meetings scheduled for Mondays at 10 AM</li>
+                    <li>Agile methodology with 2-week sprints</li>
+                    <li>Client will provide test environment access by March 20</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Next Steps Section -->
+        <div class="section">
+            <div class="section-title"><i class="ri-arrow-right-circle-line"></i> Next Steps</div>
+            <div class="note-topic" style="margin-bottom: 0;">
+                <ul>
+                    <li>Client to review and approve proposal by March 17</li>
+                    <li>Schedule detailed requirements workshop for March 18</li>
+                    <li>VentureCycle to prepare technical architecture document</li>
+                    <li>Next meeting: March 22, 2026 at 10:00 AM</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div><strong>Prepared By:</strong> VentureCycle Studio</div>
+        <div><strong>Date:</strong> March 15, 2026</div>
+    </div>
+</div>
+
+</body>
+</html>

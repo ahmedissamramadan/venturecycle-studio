@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="احسب العائد المالي والوقت الموفر للمؤسسة عبر أتمتة العمليات بالذكاء الاصطناعي مع حاسبة عائد الاستثمار التفاعلية من VentureCycle Studio.">
+  <meta name="keywords" content="VentureCycle Studio, حاسبة عائد الاستثمار, أتمتة العمليات, ROI Calculator, B2B AI, إنتاجية العمل">
+  <meta name="author" content="VentureCycle Studio">
+  
+  <title>حاسبة عائد الاستثمار للأتمتة والذكاء الاصطناعي — VentureCycle Studio</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="index.css">
+  
+  <style>
+    /* ROI Calculator Specific Overrides */
+    .roi-hero {
+      padding: 10rem 2rem 4rem;
+      text-align: center;
+    }
+    
+    .roi-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      margin-bottom: 6rem;
+    }
+    
+    .calc-card {
+      background-color: var(--glass-card-bg);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    .calc-title {
+      font-family: var(--font-ar-title), sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--clr-text-light);
+      margin-bottom: 1.8rem;
+      border-bottom: 1px solid var(--clr-border);
+      padding-bottom: 1rem;
+    }
+    
+    .input-wrapper {
+      margin-bottom: 2rem;
+    }
+    
+    .input-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    
+    .input-label {
+      font-family: var(--font-ar-title), sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--clr-text-light);
+    }
+    
+    .input-val-badge {
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      color: var(--clr-primary);
+      background-color: rgba(26, 188, 156, 0.08);
+      border: 1px solid rgba(26, 188, 156, 0.15);
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+    }
+    
+    /* Range Slider Styling */
+    .slider-input {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+      transition: background 0.3s;
+    }
+    
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--clr-primary);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(26, 188, 156, 0.5);
+      transition: transform 0.1s;
+    }
+    
+    .slider-input::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .check-box {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--clr-border);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+    
+    .check-box:checked {
+      background-color: var(--clr-primary);
+      border-color: var(--clr-primary);
+    }
+    
+    .check-box:checked::after {
+      content: '✓';
+      position: absolute;
+      color: #0A0E29;
+      font-size: 11px;
+      font-weight: 700;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .check-label-text {
+      font-family: var(--font-ar-body), sans-serif;
+      font-size: 0.82rem;
+      color: var(--clr-text-muted);
+    }
+    
+    /* Result Column */
+    .result-card {
+      background: linear-gradient(145deg, rgba(26, 188, 156, 0.04) 0%, rgba(230, 170, 91, 0.02) 100%);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .metrics-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .metric-block {
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      padding-bottom: 1.5rem;
+    }
+    
+    .metric-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .metric-title {
+      font-family: var(--font-ar-title), sans-serif;
+      font-size: 0.8rem;
+      color: var(--clr-text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .metric-val {
+      font-family: var(--font-en-title), var(--font-ar-title), sans-serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--clr-primary);
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    
+    .metric-val.orange {
+      color: var(--clr-secondary);
+    }
+    
+    .metric-period {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--clr-text-muted);
+    }
+    
+    .rec-box {
+      background-color: rgba(230, 170, 91, 0.05);
+      border: 1px solid rgba(230, 170, 91, 0.2);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-top: 2rem;
+    }
+    
+    .rec-title {
+      font-family: var(--font-ar-title), sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--clr-secondary);
+      margin-bottom: 0.4rem;
+    }
+    
+    .rec-desc {
+      font-family: var(--font-ar-body), sans-serif;
+      font-size: 0.78rem;
+      color: var(--clr-text-muted);
+      line-height: 1.6;
+    }
+    
+    .rec-btn {
+      margin-top: 1.8rem;
+      width: 100%;
+      text-align: center;
+    }
+    
+    @media (max-width: 960px) {
+      .roi-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="orb-container" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-container">
+      <a href="index.html#hero" class="nav-brand" id="brand-logo">
+        VentureCycle <span class="brand-sub">Studio</span>
+        <span class="nav-version">v3</span>
+      </a>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="index.html#story" class="nav-link">القصة</a></li>
+        <li><a href="index.html#services" class="nav-link">الخدمات</a></li>
+        <li><a href="index.html#portfolio" class="nav-link">الأعمال</a></li>
+        <li><a href="index.html#graveyard" class="nav-link">الأرشيف</a></li>
+        <li><a href="index.html#ai-sandbox" class="nav-link">المحاكاة</a></li>
+        <li><a href="index.html#pricing" class="nav-link">الأسعار</a></li>
+        <li><a href="index.html#contact" class="nav-btn">تواصل معنا</a></li>
+      </ul>
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="تبديل الوضع الليلي والنهاري">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+      <button class="menu-toggle" id="mobile-menu" aria-label="افتح القائمة">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="roi-hero">
+    <div class="inner-container">
+      <div class="section-badge reveal">الأداة الاستراتيجية للأتمتة</div>
+      <h1 class="hero-title reveal">احسب <span class="highlight-cyan">العائد المالي والوقتي</span> لمؤسستك</h1>
+      <p class="hero-subtitle reveal">أدخل المعايير التشغيلية الخاصة بفريقك حالياً، وشاهد كيف يمكن للأنظمة المؤتمتة تسريع وتيرة عملك وخفض التكلفة.</p>
+    </div>
+  </header>
+
+  <!-- Calculator Main -->
+  <main class="inner-container">
+    <div class="roi-grid">
+      <!-- Input Panel -->
+      <section class="calc-card reveal">
+        <h2 class="calc-title">المعايير التشغيلية الحالية</h2>
+        
+        <div class="input-wrapper">
+          <div class="input-label-row">
+            <label class="input-label" for="staff-count">عدد الموظفين المنفذين لمهام يدوية:</label>
+            <span class="input-val-badge" id="staff-val">5 موظفين</span>
+          </div>
+          <input type="range" class="slider-input" id="staff-count" min="1" max="50" value="5">
+        </div>
+        
+        <div class="input-wrapper">
+          <div class="input-label-row">
+            <label class="input-label" for="manual-hours">الساعات اليدوية المهدرة أسبوعياً (لكل موظف):</label>
+            <span class="input-val-badge" id="hours-val">15 ساعة</span>
+          </div>
+          <input type="range" class="slider-input" id="manual-hours" min="5" max="40" value="15">
+        </div>
+        
+        <div class="input-wrapper">
+          <div class="input-label-row">
+            <label class="input-label" for="hourly-wage">متوسط التكلفة المالية للموظف (ساعة/$):</label>
+            <span class="input-val-badge" id="wage-val">12 $</span>
+          </div>
+          <input type="range" class="slider-input" id="hourly-wage" min="5" max="100" value="12">
+        </div>
+        
+        <div class="input-wrapper">
+          <span class="input-label">العمليات المرشحة للأتمتة بالـ AI:</span>
+          <div class="checkbox-group">
+            <label class="check-item">
+              <input type="checkbox" class="check-box" id="opt-data" checked data-efficiency="0.8">
+              <span class="check-label-text">إدخال البيانات وفرز الإيميلات وإدارة الـ CRM (توفر ~80% من الوقت)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" class="check-box" id="opt-support" checked data-efficiency="0.7">
+              <span class="check-label-text">خدمة العملاء والرد على الاستفسارات الفورية (توفر ~70% من الوقت)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" class="check-box" id="opt-marketing" checked data-efficiency="0.6">
+              <span class="check-label-text">صناعة وجدولة المحتوى وكتابة الإعلانات (توفر ~60% من الوقت)</span>
+            </label>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Result Panel -->
+      <section class="result-card reveal">
+        <div class="metrics-container">
+          <div class="metric-block">
+            <span class="metric-title">الوقت الموفر للمؤسسة شهرياً</span>
+            <div class="metric-val" id="res-hours">
+              0 <span class="metric-period">ساعة عمل</span>
+            </div>
+          </div>
+          
+          <div class="metric-block">
+            <span class="metric-title">التوفير المالي المباشر شهرياً</span>
+            <div class="metric-val orange" id="res-cash">
+              0 <span class="metric-period">$ شهرياً</span>
+            </div>
+          </div>
+          
+          <div class="metric-block">
+            <span class="metric-title">الإنتاجية المستعادة سنوياً</span>
+            <div class="metric-val" id="res-yearly">
+              0 <span class="metric-period">ساعة/سنة</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rec-box">
+          <div class="rec-title">الباقة المقترحة لمشروعك:</div>
+          <div class="rec-desc" id="rec-package-text">تحليل البيانات جاري...</div>
+        </div>
+        
+        <div class="rec-btn">
+          <a href="#" id="cta-whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn-primary" style="display: block; width: 100%; text-align: center;">مناقشة أرقام الأتمتة معنا</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">VentureCycle <span class="highlight-cyan">Studio</span></span>
+        <p class="footer-desc">نظام تشغيلي متكامل لابتكار الهوية البصرية، المحتوى التسويقي، وأتمتة العمليات بالذكاء الاصطناعي للشركات B2B في الشرق الأوسط.</p>
+      </div>
+      <div class="footer-right">
+        <span class="footer-meta">© 2026 VentureCycle Studio · جميع الحقوق محفوظة</span>
+        <span class="footer-tagline">Build. Launch. Automate.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom JavaScript -->
+  <script src="index.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Calculator DOM elements
+      const staffInput = document.getElementById('staff-count');
+      const hoursInput = document.getElementById('manual-hours');
+      const wageInput = document.getElementById('hourly-wage');
+      
+      const staffVal = document.getElementById('staff-val');
+      const hoursVal = document.getElementById('hours-val');
+      const wageVal = document.getElementById('wage-val');
+      
+      const resHours = document.getElementById('res-hours');
+      const resCash = document.getElementById('res-cash');
+      const resYearly = document.getElementById('res-yearly');
+      const recPackageText = document.getElementById('rec-package-text');
+      const ctaWhatsapp = document.getElementById('cta-whatsapp-link');
+      
+      const checkboxes = document.querySelectorAll('.check-box');
+      
+      const calculateROI = () => {
+        const staff = parseInt(staffInput.value) || 0;
+        const hours = parseInt(hoursInput.value) || 0;
+        const wage = parseInt(wageInput.value) || 0;
+        
+        // Update value badges
+        staffVal.textContent = `${staff} موظفين`;
+        hoursVal.textContent = `${hours} ساعة`;
+        wageVal.textContent = `${wage} $`;
+        
+        // Calculate average efficiency factor from checked categories
+        let efficiencySum = 0;
+        let checkedCount = 0;
+        
+        checkboxes.forEach(cb => {
+          if (cb.checked) {
+            efficiencySum += parseFloat(cb.getAttribute('data-efficiency'));
+            checkedCount++;
+          }
+        });
+        
+        const efficiencyFactor = checkedCount > 0 ? (efficiencySum / checkedCount) : 0;
+        
+        // Formulations
+        const totalManualHoursPerMonth = staff * hours * 4.33; // 4.33 weeks per month
+        const hoursSaved = Math.round(totalManualHoursPerMonth * efficiencyFactor);
+        const cashSaved = Math.round(hoursSaved * wage);
+        const yearlyHoursSaved = Math.round(hoursSaved * 12);
+        
+        // Render values
+        resHours.innerHTML = `${hoursSaved.toLocaleString()} <span class="metric-period">ساعة عمل</span>`;
+        resCash.innerHTML = `${cashSaved.toLocaleString()} <span class="metric-period">$ شهرياً</span>`;
+        resYearly.innerHTML = `${yearlyHoursSaved.toLocaleString()} <span class="metric-period">ساعة/سنة</span>`;
+        
+        // Dynamic package recommendation
+        let recommendedPackage = "";
+        let packageDetails = "";
+        
+        if (cashSaved < 1200) {
+          recommendedPackage = "Starter (باقة الحل الفردي)";
+          packageDetails = "نوصي بالبدء بأتمتة العملية الأعلى استهلاكاً للوقت لديك بشكل فردي ومستهدف لتقييم النتائج.";
+        } else if (cashSaved >= 1200 && cashSaved < 4000) {
+          recommendedPackage = "Studio Bundle (الدورة الكاملة)";
+          packageDetails = "حجم الهدر لديك يستحق أتمتة شاملة لمسارات العمل وتصميم الهوية والمحتوى بمحاذاة كاملة لخفض الكلفة.";
+        } else {
+          recommendedPackage = "Enterprise Retainer (شريك النمو)";
+          packageDetails = "الهدر التشغيلي ضخم جداً. ننصح بالعمل بنموذج الدعم الشهري لصيانة وتطوير أنظمة الـ AI وأتمتة المهام بشكل دوري.";
+        }
+        
+        recPackageText.innerHTML = `<strong>${recommendedPackage}</strong><br>${packageDetails}`;
+        
+        // WhatsApp Text Generation
+        const whatsappText = encodeURIComponent(
+          `أهلاً VentureCycle Studio، قمنا بحساب عائد الأتمتة لشركتنا عبر الأداة التفاعلية:\n` +
+          `- عدد الفريق: ${staff} موظف\n` +
+          `- توفير الوقت المتوقع: ${hoursSaved} ساعة شهرياً\n` +
+          `- التوفير المالي المحسوب: ${cashSaved} $ شهرياً\n` +
+          `- الباقة المقترحة: ${recommendedPackage}\n` +
+          `نريد حجز مكالمة اكتشاف لمناقشة بدء التنفيذ.`
+        );
+        
+        ctaWhatsapp.href = `https://wa.me/201501656010?text=${whatsappText}`;
+      };
+      
+      // Event listeners for inputs
+      staffInput.addEventListener('input', calculateROI);
+      hoursInput.addEventListener('input', calculateROI);
+      wageInput.addEventListener('input', calculateROI);
+      checkboxes.forEach(cb => cb.addEventListener('change', calculateROI));
+      
+      // Trigger initial calculation
+      calculateROI();
+    });
+  </script>
+</body>
+</html>

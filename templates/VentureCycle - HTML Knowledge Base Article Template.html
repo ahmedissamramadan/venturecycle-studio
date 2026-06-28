@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>VentureCycle Studio - Knowledge Base</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-turquoise: #1ABC9C;
+            --color-turquoise-hover: #16A085;
+            --color-orange: #E6AA5B;
+            --color-dark: #2D3436;
+            --color-text-light: #636E72;
+            --color-bg-light: #F5F6FA;
+            --color-white: #FFFFFF;
+            --color-border: #DFE4EA;
+            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-family-mono: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            color: var(--color-dark);
+            background-color: var(--color-bg-light);
+            line-height: 1.6;
+            width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        a {
+            color: var(--color-turquoise);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--color-turquoise-hover);
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--color-dark);
+            text-decoration: none;
+        }
+
+        .header-logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .header-search {
+            flex-grow: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .header-search input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: var(--color-bg-light);
+            transition: border-color 0.2s;
+        }
+
+        .header-search input:focus {
+            outline: none;
+            border-color: var(--color-turquoise);
+            background-color: var(--color-white);
+        }
+
+        .header-search i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-light);
+        }
+
+        .btn-primary {
+            background-color: var(--color-turquoise);
+            color: var(--color-white);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-turquoise-hover);
+            text-decoration: none;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 16px 32px;
+            font-size: 14px;
+            color: var(--color-text-light);
+            background-color: var(--color-bg-light);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .breadcrumbs a {
+            color: var(--color-text-light);
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--color-turquoise);
+        }
+
+        .breadcrumbs span {
+            margin: 0 8px;
+        }
+
+        /* Main Layout */
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 130px);
+            background-color: var(--color-white);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            border-right: 1px solid var(--color-border);
+            padding: 24px 0;
+            background-color: var(--color-bg-light);
+            flex-shrink: 0;
+            overflow-y: auto;
+            height: calc(100vh - 130px);
+            position: sticky;
+            top: 130px;
+        }
+
+        .nav-group {
+            margin-bottom: 16px;
+        }
+
+        .nav-group-title {
+            padding: 8px 24px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .nav-group-title i {
+            transition: transform 0.2s;
+        }
+
+        .nav-group.active .nav-group-title i {
+            transform: rotate(90deg);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: none;
+        }
+
+        .nav-group.active .nav-list {
+            display: block;
+        }
+
+        .nav-item a {
+            display: block;
+            padding: 8px 24px 8px 36px;
+            font-size: 14px;
+            color: var(--color-dark);
+            text-decoration: none;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-item a:hover {
+            background-color: #E2E8F0;
+            color: var(--color-turquoise);
+        }
+
+        .nav-item.active a {
+            background-color: #E6F7F4;
+            color: var(--color-turquoise);
+            font-weight: 600;
+            border-right: 3px solid var(--color-turquoise);
+        }
+
+        /* Article Content */
+        .article-main {
+            flex-grow: 1;
+            padding: 48px;
+            max-width: 920px;
+            display: flex;
+            gap: 48px;
+        }
+
+        .article-content {
+            flex-grow: 1;
+            max-width: 650px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background-color: #E6F7F4;
+            color: var(--color-turquoise-hover);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .article-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            color: var(--color-dark);
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Typography & Content Styles */
+        .article-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-dark);
+        }
+
+        .article-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--color-dark);
+        }
+
+        .article-content p {
+            margin-bottom: 16px;
+            color: var(--color-text-light);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .article-content ul, .article-content ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: var(--color-text-light);
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .placeholder-box {
+            background-color: var(--color-bg-light);
+            border: 2px dashed var(--color-border);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            color: var(--color-text-light);
+            margin: 24px 0;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .placeholder-box i {
+            font-size: 32px;
+            color: var(--color-border);
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--color-dark);
+            color: #E2E8F0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 24px 0;
+            font-family: var(--font-family-mono);
+            font-size: 14px;
+            position: relative;
+        }
+
+        code {
+            font-family: var(--font-family-mono);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 16px;
+            border-radius: 8px;
+            margin: 24px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .callout i {
+            font-size: 20px;
+        }
+
+        .callout-tip {
+            background-color: #EBF8FF;
+            border-left: 4px solid #3182CE;
+        }
+        .callout-tip i { color: #3182CE; }
+
+        .callout-warning {
+            background-color: #FFF5F5;
+            border-left: 4px solid #E53E3E;
+        }
+        .callout-warning i { color: #E53E3E; }
+
+        .callout-success {
+            background-color: #F0FFF4;
+            border-left: 4px solid #38A169;
+        }
+        .callout-success i { color: #38A169; }
+
+        /* Table of Contents (Sticky) */
+        .toc-sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 150px;
+            align-self: flex-start;
+            border-left: 1px solid var(--color-border);
+            padding-left: 24px;
+        }
+
+        .toc-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 12px;
+        }
+
+        .toc-item a {
+            font-size: 13px;
+            color: var(--color-text-light);
+            text-decoration: none;
+        }
+
+        .toc-item a:hover, .toc-item.active a {
+            color: var(--color-turquoise);
+        }
+
+        /* Footer sections */
+        .feedback-section {
+            margin-top: 48px;
+            padding: 24px;
+            background-color: var(--color-bg-light);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .feedback-btns {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-turquoise);
+            color: var(--color-turquoise);
+        }
+
+        .article-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+
+        .tags span {
+            background-color: #EDF2F7;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .share-actions a {
+            margin-left: 16px;
+            color: var(--color-text-light);
+        }
+
+        .share-actions a:hover {
+            color: var(--color-turquoise);
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background-color: var(--color-dark);
+            color: #A0AEC0;
+            padding: 48px 32px;
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col a {
+            color: #A0AEC0;
+        }
+
+        .footer-col a:hover {
+            color: var(--color-turquoise);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4A5568;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="header-logo">
+            <img src="../assets/p-vc.png" alt="VentureCycle Logo">
+            VentureCycle Studio
+        </a>
+        <div class="header-search">
+            <i class="ri-search-line"></i>
+            <input type="text" placeholder="Search documentation...">
+        </div>
+        <a href="#" class="btn-primary">Contact Support</a>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <a href="#">Home</a> <span>></span>
+        <a href="#">Documentation</a> <span>></span>
+        <span style="color: var(--color-dark);">Getting Started</span>
+    </div>
+
+    <div class="layout-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="nav-group active">
+                <div class="nav-group-title">Getting Started <i class="ri-arrow-right-s-line"></i></div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#">Quick Start Guide</a></li>
+                    <li class="nav-item"><a href="#">Installation</a></li>
+                    <li class="nav-item"><a href="#">Configuration</a></li>
+                    <li class="nav-item active"><a href="#">How to Set Up Your First AI Workflow</a></li>
+                </ul>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-title">User Guides <i class="ri-arrow-right-s-line"></i></div>
+                <ul class="nav-list" style="display: none;">
+                    <li class="nav-item"><a href="#">Dashboard Overview</a></li>
+                    <li class="nav-item"><a href="#">Creating Workflows</a></li>
+                    <li class="nav-item"><a href="#">Managing Users</a></li>
+                </ul>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-title">API Documentation <i class="ri-arrow-right-s-line"></i></div>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-title">Troubleshooting <i class="ri-arrow-right-s-line"></i></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="article-main">
+            <div class="article-content">
+                <span class="category-badge">Getting Started</span>
+                <h1 class="article-title">How to Set Up Your First AI Workflow</h1>
+                
+                <div class="article-meta">
+                    <div class="article-meta-item">
+                        <i class="ri-calendar-line"></i> Last updated: March 15, 2026
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="ri-time-line"></i> 5 min read
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="ri-eye-line"></i> 1,234 views
+                    </div>
+                    <div class="article-meta-item" style="color: var(--color-turquoise);">
+                        <i class="ri-thumb-up-line"></i> 89% helpful
+                    </div>
+                </div>
+
+                <h2 id="overview">Overview</h2>
+                <p>This guide will walk you through creating your first AI-powered automation workflow in VentureCycle Studio. By the end of this tutorial, you'll have a working workflow that processes data automatically.</p>
+
+                <h2 id="prerequisites">Prerequisites</h2>
+                <p>Before you begin, ensure you have:</p>
+                <ul>
+                    <li>✓ Active VentureCycle account</li>
+                    <li>✓ Admin or Editor permissions</li>
+                    <li>✓ API credentials configured</li>
+                    <li>✓ Sample data for testing</li>
+                </ul>
+
+                <h2 id="instructions">Step-by-Step Instructions</h2>
+                
+                <h3>Step 1: Access the Workflow Builder</h3>
+                <ol>
+                    <li>Log in to your VentureCycle dashboard</li>
+                    <li>Navigate to "Workflows" in the left menu</li>
+                    <li>Click "Create New Workflow" button</li>
+                </ol>
+
+                <div class="placeholder-box">
+                    <i class="ri-image-line"></i>
+                    <span>Screenshot: Workflow Builder Dashboard</span>
+                </div>
+
+                <h3>Step 2: Configure Workflow Settings</h3>
+                <p>Enter the following information:</p>
+                <ul>
+                    <li>Workflow Name: "My First Automation"</li>
+                    <li>Description: Brief description of what this workflow does</li>
+                    <li>Trigger Type: Select from dropdown (Manual, Scheduled, Event-based)</li>
+                </ul>
+
+<pre><button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button><code class="language-json">{
+  "name": "My First Automation",
+  "trigger": "scheduled",
+  "schedule": "0 9 * * *"
+}</code></pre>
+
+                <h3>Step 3: Add Workflow Steps</h3>
+                <p>Click "Add Step" and choose from available actions:</p>
+                <ul>
+                    <li>Data Input</li>
+                    <li>Data Processing</li>
+                    <li>AI Analysis</li>
+                    <li>Output/Export</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <i class="ri-lightbulb-flash-line"></i>
+                    <div>
+                        <strong>Tip:</strong> Start with simple workflows and gradually add complexity.
+                    </div>
+                </div>
+
+                <h2 id="examples">Code Examples</h2>
+                <h3>Python Example:</h3>
+<pre><button class="copy-btn"><i class="ri-file-copy-line"></i> Copy</button><code class="language-python">from venturecycle import Workflow
+
+# Create workflow
+workflow = Workflow(
+    name="My First Automation",
+    trigger="scheduled"
+)
+
+# Add processing step
+workflow.add_step(
+    type="ai_processing",
+    model="arabic-nlp-v2"
+)
+
+# Activate
+workflow.activate()</code></pre>
+
+                <div class="feedback-section">
+                    <div class="feedback-title">Was This Article Helpful?</div>
+                    <div class="feedback-btns">
+                        <button class="btn-outline"><i class="ri-thumb-up-line"></i> Yes (45)</button>
+                        <button class="btn-outline"><i class="ri-thumb-down-line"></i> No (6)</button>
+                    </div>
+                    <a href="#" style="font-size: 13px;">Tell us how we can improve this article</a>
+                </div>
+
+                <div class="article-footer">
+                    <div class="tags">
+                        <span>workflow</span>
+                        <span>getting-started</span>
+                        <span>automation</span>
+                    </div>
+                    <div class="share-actions">
+                        <a href="#"><i class="ri-mail-line"></i></a>
+                        <a href="#"><i class="ri-link"></i></a>
+                        <a href="#"><i class="ri-printer-line"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky TOC -->
+            <div class="toc-sidebar">
+                <div class="toc-title">On this page</div>
+                <ul class="toc-list">
+                    <li class="toc-item active"><a href="#overview">Overview</a></li>
+                    <li class="toc-item"><a href="#prerequisites">Prerequisites</a></li>
+                    <li class="toc-item"><a href="#instructions">Step-by-Step Instructions</a></li>
+                    <li class="toc-item"><a href="#examples">Code Examples</a></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Related Resources</h4>
+                <ul>
+                    <li><a href="#">Video Tutorials</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Community Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Still Need Help?</h4>
+                <ul>
+                    <li><i class="ri-mail-line"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="21525451514e53556157444f555453444258424d440f52555445484e">[email&#160;protected]</a></li>
+                    <li><i class="ri-chat-3-line"></i> Live Chat (9-6 GMT+2)</li>
+                    <li><i class="ri-phone-line"></i> +201501656010</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>VentureCycle Studio © 2026</div>
+            <div>
+                <a href="#" style="color: #A0AEC0; margin-right: 16px;">Privacy Policy</a>
+                <a href="#" style="color: #A0AEC0;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

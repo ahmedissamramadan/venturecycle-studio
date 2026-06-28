@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <title>VentureCycle Studio Presentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1920px;
+            background-color: #1a1f24; /* Darker background for the presentation container */
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #FFFFFF;
+            padding: 40px 0;
+        }
+
+        .presentation-container {
+            width: 1920px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .slide-wrapper {
+            width: 1920px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide-label {
+            width: 1920px;
+            padding: 10px 40px;
+            background: #111;
+            color: #DFE6E9;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            border-left: 4px solid #1ABC9C;
+            margin-bottom: 10px;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background-color: #2D3436;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* SVG Patterns */
+        .pattern-corner-tl {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            opacity: 0.1;
+        }
+
+        .pattern-corner-br {
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            opacity: 0.1;
+        }
+
+        .pattern-center-large {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            opacity: 0.05;
+        }
+
+        .pattern-side {
+            position: absolute;
+            top: 150px;
+            right: 100px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.15;
+        }
+
+        /* Logo Placeholders */
+        .logo {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .logo-slide1 {
+            top: 60px;
+            left: 60px;
+            height: 60px;
+        }
+
+        .logo-slide2 {
+            bottom: 60px;
+            left: 60px;
+            height: 40px;
+        }
+
+        .logo-slide3 {
+            top: 60px;
+            left: 60px;
+            height: 40px;
+        }
+
+        /* Slide 1 Styles */
+        .slide1-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 80%;
+        }
+
+        .s1-title {
+            font-size: 72px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .s1-accent-line {
+            width: 120px;
+            height: 4px;
+            background-color: #1ABC9C;
+            margin: 0 auto 30px auto;
+        }
+
+        .s1-subtitle {
+            font-size: 36px;
+            color: #1ABC9C;
+            font-weight: 600;
+            margin-bottom: 60px;
+        }
+
+        .s1-presenter {
+            font-size: 24px;
+            color: #DFE6E9;
+            margin-bottom: 10px;
+        }
+
+        .s1-company {
+            font-size: 20px;
+            color: #636E72;
+            margin-bottom: 10px;
+        }
+
+        .s1-date {
+            font-size: 18px;
+            color: #636E72;
+        }
+
+        .s1-footer {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-size: 14px;
+            color: #636E72;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 2 Styles */
+        .s2-number {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            font-size: 120px;
+            font-weight: 700;
+            color: #1ABC9C;
+            line-height: 1;
+        }
+
+        .s2-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .s2-title {
+            font-size: 64px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .s2-subtitle {
+            font-size: 28px;
+            color: #DFE6E9;
+        }
+
+        .s2-vertical-line {
+            position: absolute;
+            top: 30%;
+            left: 0;
+            width: 4px;
+            height: 40%;
+            background-color: #1ABC9C;
+        }
+
+        /* Slide 3 Styles */
+        .s3-header {
+            position: absolute;
+            top: 60px;
+            left: 140px;
+        }
+
+        .s3-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .s3-title-line {
+            width: 80px;
+            height: 2px;
+            background-color: #1ABC9C;
+        }
+
+        .s3-layout {
+            position: absolute;
+            top: 220px;
+            left: 140px;
+            width: 1640px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .s3-col-left {
+            width: 55%;
+        }
+
+        .s3-col-right {
+            width: 40%;
+            position: relative;
+        }
+
+        .s3-heading {
+            font-size: 32px;
+            color: #1ABC9C;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .s3-list {
+            list-style: none;
+        }
+
+        .s3-list li {
+            font-size: 24px;
+            color: #FFFFFF;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 40px;
+            line-height: 1.8;
+        }
+
+        .s3-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 12px;
+            height: 12px;
+            background-color: #E6AA5B;
+            transform: rotate(45deg);
+        }
+
+        .s3-stats-box {
+            background-color: #1a1f24;
+            padding: 60px;
+            border-radius: 8px;
+            border-left: 4px solid #1ABC9C;
+            position: relative;
+            z-index: 10;
+            margin-top: 40px;
+        }
+
+        .s3-stat-item {
+            margin-bottom: 40px;
+        }
+
+        .s3-stat-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .s3-stat-num1 {
+            font-size: 56px;
+            font-weight: 700;
+            color: #1ABC9C;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .s3-stat-num2 {
+            font-size: 56px;
+            font-weight: 700;
+            color: #E6AA5B;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .s3-stat-label {
+            font-size: 18px;
+            color: #DFE6E9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .s3-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .s3-footer-text {
+            font-size: 16px;
+            color: #636E72;
+        }
+
+        /* SVG Generator for Islamic Geometric 8-point star */
+        .svg-pattern {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Export Instructions: 
+     To screenshot each slide at exact 16:9 dimensions (1920x1080), 
+     capture only the .slide elements individually. -->
+
+<div class="presentation-container">
+
+    <!-- Slide 1 -->
+    <div class="slide-wrapper">
+        <div class="slide-label">
+            <span>Cover Slide</span>
+            <span>Dimensions: 1920 × 1080</span>
+        </div>
+        <div class="slide">
+            <!-- Geometric Pattern TL -->
+            <div class="pattern-corner-tl">
+                <svg class="svg-pattern" viewBox="0 0 100 100" fill="none" stroke="#1ABC9C" stroke-width="2">
+                    <rect x="25" y="25" width="50" height="50" transform="rotate(0 50 50)"/>
+                    <rect x="25" y="25" width="50" height="50" transform="rotate(45 50 50)"/>
+                    <circle cx="50" cy="50" r="15" />
+                </svg>
+            </div>
+            
+            <!-- Geometric Pattern BR -->
+            <div class="pattern-corner-br">
+                <svg class="svg-pattern" viewBox="0 0 100 100" fill="none" stroke="#1ABC9C" stroke-width="2">
+                    <rect x="25" y="25" width="50" height="50" transform="rotate(0 50 50)"/>
+                    <rect x="25" y="25" width="50" height="50" transform="rotate(45 50 50)"/>
+                    <circle cx="50" cy="50" r="15" />
+                </svg>
+            </div>
+
+            <!-- LOGO: Replace src="LOGO_URL_HERE" -->
+            <div class="logo logo-slide1">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" />
+            </div>
+
+            <div class="slide1-content">
+                <h1 class="s1-title">AI-Powered Automation</h1>
+                <div class="s1-accent-line"></div>
+                <h2 class="s1-subtitle">Transforming MENA Businesses</h2>
+                
+                <p class="s1-presenter">VentureCycle Studio</p>
+                <p class="s1-company">VentureCycle Studio</p>
+                <p class="s1-date">March 2026</p>
+            </div>
+
+            <div class="s1-footer">Confidential</div>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-wrapper">
+        <div class="slide-label">
+            <span>Section Divider</span>
+            <span>Dimensions: 1920 × 1080</span>
+        </div>
+        <div class="slide">
+            <!-- Large Geometric Pattern Center -->
+            <div class="pattern-center-large">
+                <svg class="svg-pattern" viewBox="0 0 100 100" fill="none" stroke="#1ABC9C" stroke-width="1">
+                    <rect x="10" y="10" width="80" height="80" transform="rotate(0 50 50)"/>
+                    <rect x="10" y="10" width="80" height="80" transform="rotate(45 50 50)"/>
+                    <rect x="20" y="20" width="60" height="60" transform="rotate(22.5 50 50)" stroke="#E6AA5B"/>
+                    <circle cx="50" cy="50" r="30" stroke="#1ABC9C"/>
+                    <circle cx="50" cy="50" r="10" stroke="#E6AA5B"/>
+                </svg>
+            </div>
+
+            <div class="s2-vertical-line"></div>
+
+            <div class="s2-number">01</div>
+
+            <div class="s2-content">
+                <h2 class="s2-title">Our Approach</h2>
+                <p class="s2-subtitle">Strategic AI Implementation</p>
+            </div>
+
+            <!-- LOGO: Replace src="LOGO_URL_HERE" -->
+            <div class="logo logo-slide2">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-wrapper">
+        <div class="slide-label">
+            <span>Content Layout</span>
+            <span>Dimensions: 1920 × 1080</span>
+        </div>
+        <div class="slide">
+            <!-- LOGO: Replace src="LOGO_URL_HERE" -->
+            <div class="logo logo-slide3">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" />
+            </div>
+
+            <div class="s3-header">
+                <h2 class="s3-title">Key Services</h2>
+                <div class="s3-title-line"></div>
+            </div>
+
+            <div class="s3-layout">
+                <div class="s3-col-left">
+                    <h3 class="s3-heading">Technical Implementation</h3>
+                    <ul class="s3-list">
+                        <li>Custom AI automation systems</li>
+                        <li>Arabic NLP integration</li>
+                        <li>Workflow engine development</li>
+                        <li>API integrations</li>
+                        <li>Cloud infrastructure</li>
+                    </ul>
+                </div>
+                
+                <div class="s3-col-right">
+                    <!-- Decorative Pattern Right Side -->
+                    <div class="pattern-side">
+                        <svg class="svg-pattern" viewBox="0 0 100 100" fill="none" stroke="#1ABC9C" stroke-width="2">
+                            <rect x="15" y="15" width="70" height="70" transform="rotate(0 50 50)"/>
+                            <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)"/>
+                        </svg>
+                    </div>
+
+                    <div class="s3-stats-box">
+                        <div class="s3-stat-item">
+                            <div class="s3-stat-num1">40%</div>
+                            <div class="s3-stat-label">Efficiency Gain</div>
+                        </div>
+                        <div class="s3-stat-item">
+                            <div class="s3-stat-num2">5+</div>
+                            <div class="s3-stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s3-footer">
+                <div class="s3-footer-text">3</div>
+                <div class="s3-footer-text">VentureCycle Studio</div>
+                <div class="s3-footer-text">venturecycle.studio</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

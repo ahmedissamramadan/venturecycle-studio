@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureCycle Studio - Project Proposal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Semibold.ttf') format('truetype');
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+        }
+
+        :root {
+            --primary: #1ABC9C;
+            --text-dark: #2D3436;
+            --text-light: #636e72;
+            --bg-light: #F5F6FA;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'MiSans', sans-serif;
+            color: var(--text-dark);
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .document-container {
+            width: 800px;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header {
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: auto;
+        }
+
+        .company-info {
+            text-align: right;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .company-info strong {
+            color: var(--text-dark);
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .title-section {
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--primary);
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .proposal-meta {
+            text-align: right;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .prepared-for {
+            background-color: var(--bg-light);
+            padding: 30px 60px;
+            margin: 0 60px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .prepared-for h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .client-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 15px;
+        }
+
+        .client-grid div span {
+            color: var(--text-light);
+            display: inline-block;
+            width: 70px;
+        }
+
+        .section {
+            padding: 30px 60px;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 22px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 24px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .scope-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .scope-item {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .scope-item::before {
+            content: counter(scope-counter);
+            counter-increment: scope-counter;
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .scope-list {
+            counter-reset: scope-counter;
+        }
+
+        .scope-item h3 {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .scope-item ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .scope-item li {
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        tr:nth-child(even) td {
+            background-color: #fafafa;
+        }
+
+        td:nth-child(3), th:nth-child(3),
+        td:nth-child(4), th:nth-child(4),
+        td:nth-child(5), th:nth-child(5) {
+            text-align: right;
+        }
+
+        .table-subtotal td {
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom: none;
+        }
+
+        .table-total {
+            background-color: var(--primary) !important;
+        }
+
+        .table-total td {
+            color: #fff !important;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--primary);
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid #fff;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 15px;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .terms-box {
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .terms-box h3 {
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .terms-box ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .terms-box li {
+            margin-bottom: 8px;
+        }
+
+        .acceptance {
+            padding: 40px 60px;
+            background-color: #fafafa;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .acceptance p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--text-dark);
+            margin-bottom: 10px;
+            height: 30px;
+        }
+
+        .sig-label {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .footer {
+            padding: 20px 60px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            border-top: 2px solid var(--primary);
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+    <div class="header">
+        <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo-img">
+        <div class="company-info">
+            <strong>VentureCycle Studio</strong>
+            Cairo, Egypt<br>
+            <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="76171e1b13123600131802030413150f151a1358050203121f19">[email&#160;protected]</a><br>
+            +201501656010
+        </div>
+    </div>
+
+    <div class="title-section">
+        <h1>Project Proposal</h1>
+        <div class="proposal-meta">
+            <strong>Proposal #:</strong> VC-2026-001<br>
+            <strong>Date:</strong> March 15, 2026<br>
+            <strong>Valid Until:</strong> April 15, 2026
+        </div>
+    </div>
+
+    <div class="prepared-for">
+        <h2>Prepared For:</h2>
+        <div class="client-grid">
+            <div>
+                <strong>[Client Company Name]</strong>
+            </div>
+            <div>
+                <span>Contact:</span> [Name]
+            </div>
+            <div>
+                <span>Email:</span> [<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="385b54515d564c785d55595154165b5755">[email&#160;protected]</a>]
+            </div>
+            <div>
+                <span>Phone:</span> [Phone Number]
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title"><i class="ri-file-text-line"></i> Executive Summary</h2>
+        <p>VentureCycle Studio is pleased to present this proposal for developing a custom AI automation system for [Client Company]. Our solution will streamline your business processes, reduce manual workload, and provide intelligent insights tailored for the MENA market.</p>
+        <p>This proposal outlines our approach, deliverables, timeline, and investment required to transform your operations through AI-powered automation.</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title"><i class="ri-list-check-2"></i> Scope of Work</h2>
+        <div class="scope-list">
+            <div class="scope-item">
+                <h3>Discovery & Requirements Analysis</h3>
+                <ul>
+                    <li>Stakeholder interviews</li>
+                    <li>Process mapping</li>
+                    <li>Technical requirements documentation</li>
+                </ul>
+            </div>
+            <div class="scope-item">
+                <h3>System Design & Architecture</h3>
+                <ul>
+                    <li>Solution architecture design</li>
+                    <li>Technology stack selection</li>
+                    <li>Integration planning</li>
+                </ul>
+            </div>
+            <div class="scope-item">
+                <h3>Development & Implementation</h3>
+                <ul>
+                    <li>Custom AI model development</li>
+                    <li>System integration</li>
+                    <li>Arabic language optimization</li>
+                </ul>
+            </div>
+            <div class="scope-item">
+                <h3>Testing & Quality Assurance</h3>
+                <ul>
+                    <li>Comprehensive testing</li>
+                    <li>Performance optimization</li>
+                    <li>Security audit</li>
+                </ul>
+            </div>
+            <div class="scope-item">
+                <h3>Deployment & Training</h3>
+                <ul>
+                    <li>Production deployment</li>
+                    <li>Team training sessions</li>
+                    <li>Documentation delivery</li>
+                </ul>
+            </div>
+            <div class="scope-item">
+                <h3>Support & Maintenance</h3>
+                <ul>
+                    <li>Technical support (3 months)</li>
+                    <li>Bug fixes</li>
+                    <li>Performance monitoring</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title"><i class="ri-money-dollar-circle-line"></i> Pricing</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Discovery Phase</td>
+                    <td>Requirements & Analysis</td>
+                    <td>1</td>
+                    <td>$5,000</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td>Design Phase</td>
+                    <td>Architecture & Planning</td>
+                    <td>1</td>
+                    <td>$8,000</td>
+                    <td>$8,000</td>
+                </tr>
+                <tr>
+                    <td>Development</td>
+                    <td>Custom AI System</td>
+                    <td>1</td>
+                    <td>$25,000</td>
+                    <td>$25,000</td>
+                </tr>
+                <tr>
+                    <td>Testing & QA</td>
+                    <td>Quality Assurance</td>
+                    <td>1</td>
+                    <td>$5,000</td>
+                    <td>$5,000</td>
+                </tr>
+                <tr>
+                    <td>Deployment</td>
+                    <td>Launch & Training</td>
+                    <td>1</td>
+                    <td>$4,000</td>
+                    <td>$4,000</td>
+                </tr>
+                <tr>
+                    <td>Support</td>
+                    <td>Post-launch Support (3mo)</td>
+                    <td>1</td>
+                    <td>$3,000</td>
+                    <td>$3,000</td>
+                </tr>
+                <tr class="table-subtotal">
+                    <td colspan="4">Subtotal</td>
+                    <td>$50,000</td>
+                </tr>
+                <tr class="table-total">
+                    <td colspan="4">Total Investment</td>
+                    <td>$50,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title"><i class="ri-calendar-line"></i> Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Week 1-2</div>
+                <div class="timeline-content">Discovery & Requirements</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 3-4</div>
+                <div class="timeline-content">Design & Architecture</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 5-12</div>
+                <div class="timeline-content">Development</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 13-14</div>
+                <div class="timeline-content">Testing & QA</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 15-16</div>
+                <div class="timeline-content">Deployment & Training</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Week 17-28</div>
+                <div class="timeline-content">Support Period</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title"><i class="ri-information-line"></i> Terms & Conditions</h2>
+        <div class="terms-grid">
+            <div class="terms-box">
+                <h3>Payment Terms</h3>
+                <ul>
+                    <li>30% upon proposal acceptance</li>
+                    <li>40% upon development completion</li>
+                    <li>30% upon final delivery</li>
+                </ul>
+            </div>
+            <div class="terms-box">
+                <h3>General Terms</h3>
+                <ol>
+                    <li>This proposal is valid for 30 days from the date above</li>
+                    <li>Payment terms: Net 15 days from invoice date</li>
+                    <li>Project timeline begins upon receipt of initial payment</li>
+                    <li>Changes to scope may affect timeline and pricing</li>
+                    <li>All intellectual property rights transfer upon final payment</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="acceptance">
+        <h2 class="section-title" style="border:none; margin-bottom:10px;"><i class="ri-pen-nib-line"></i> Client Acceptance</h2>
+        <p>By signing below, you accept this proposal and authorize VentureCycle Studio to begin work.</p>
+        
+        <div class="signature-grid">
+            <div>
+                <div class="sig-line"></div>
+                <div class="sig-label">Signature</div>
+                <div class="sig-line" style="margin-top: 30px;"></div>
+                <div class="sig-label">Print Name</div>
+            </div>
+            <div>
+                <div class="sig-line"></div>
+                <div class="sig-label">Date</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        VentureCycle Studio • Cairo, Egypt • <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="593831343c3d192f3c372d2c2b3c3a203a353c772a2d2c3d3036">[email&#160;protected]</a>
+    </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

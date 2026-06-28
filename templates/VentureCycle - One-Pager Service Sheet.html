@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureCycle Studio - Service Sheet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        /* Fonts */
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Regular.otf') format('opentype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Bold.otf') format('opentype');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Cairo';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSerifCJKsc-Regular.otf') format('opentype');
+            font-weight: 400;
+        }
+
+        /* Root Variables */
+        :root {
+            --color-turquoise: #1ABC9C;
+            --color-orange: #E6AA5B;
+            --color-purple: #6C5CE7;
+            --color-teal: #00B8D4;
+            --color-dark: #2D3436;
+            --color-medium: #636E72;
+            --color-light: #DFE6E9;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-secondary: 'Cairo', serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            color: var(--color-dark);
+            background-color: #ffffff;
+            width: 1200px;
+            margin: 0 auto;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Geometric Pattern Backgrounds */
+        .pattern-bg-light {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(var(--color-turquoise) 1px, transparent 1px),
+                radial-gradient(var(--color-turquoise) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            background-color: rgba(26, 188, 156, 0.03);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+        }
+
+        .logo-container img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: var(--color-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border: 1px solid var(--color-light);
+            border-radius: 12px;
+            padding: 40px 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 28px;
+            color: #ffffff;
+        }
+
+        .icon-turquoise { background-color: var(--color-turquoise); }
+        .icon-orange { background-color: var(--color-orange); }
+        .icon-teal { background-color: var(--color-teal); }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--color-dark);
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: var(--color-medium);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            font-size: 14px;
+            color: var(--color-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .service-list li i {
+            color: var(--color-turquoise);
+            margin-right: 10px;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        /* Stats Band */
+        .stats-band {
+            background-color: var(--color-turquoise);
+            padding: 60px 0;
+            color: #ffffff;
+            background-image: 
+                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)), 
+                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 20px;
+        }
+
+        .stat-item h4 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* CTA Footer */
+        .cta-footer {
+            background-color: var(--color-dark);
+            padding: 80px 0;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border: 20px solid rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .cta-footer h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-footer p {
+            font-size: 18px;
+            color: var(--color-light);
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-turquoise);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            margin-bottom: 50px;
+        }
+
+        .btn:hover {
+            background-color: #16a085;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 40px;
+            color: var(--color-light);
+            font-size: 14px;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-info i {
+            color: var(--color-turquoise);
+            font-size: 18px;
+        }
+
+        /* Decorative Elements */
+        .decor-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero pattern-bg-light">
+        <div class="container">
+            <div class="logo-container">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo">
+            </div>
+            <h1>Transform Your Business<br>with AI Automation</h1>
+            <p>Intelligent workflows designed for the MENA region</p>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                
+                <!-- Column 1 -->
+                <div class="service-card">
+                    <div class="icon-circle icon-turquoise">
+                        <i class="ri-code-s-slash-line"></i>
+                    </div>
+                    <h3>Technical Implementation</h3>
+                    <p>Custom AI automation systems, Arabic NLP integration, workflow engine development, API integrations.</p>
+                    <ul class="service-list">
+                        <li><i class="ri-check-line"></i> Custom AI Workflows</li>
+                        <li><i class="ri-check-line"></i> Native Arabic NLP</li>
+                        <li><i class="ri-check-line"></i> Seamless API Connections</li>
+                        <li><i class="ri-check-line"></i> Scalable Architecture</li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="service-card">
+                    <div class="icon-circle icon-orange">
+                        <i class="ri-lightbulb-flash-line"></i>
+                    </div>
+                    <h3>Consultation</h3>
+                    <p>Strategic planning, process optimization, technology assessment, implementation roadmap.</p>
+                    <ul class="service-list">
+                        <li><i class="ri-check-line"></i> Digital Transformation Strategy</li>
+                        <li><i class="ri-check-line"></i> Process Audit & Optimization</li>
+                        <li><i class="ri-check-line"></i> Tech Stack Evaluation</li>
+                        <li><i class="ri-check-line"></i> Clear Execution Roadmaps</li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="service-card">
+                    <div class="icon-circle icon-teal">
+                        <i class="ri-bar-chart-box-line"></i>
+                    </div>
+                    <h3>Analytics & Optimization</h3>
+                    <p>Performance monitoring, data insights, continuous improvement, ROI tracking.</p>
+                    <ul class="service-list">
+                        <li><i class="ri-check-line"></i> Real-time Dashboards</li>
+                        <li><i class="ri-check-line"></i> Predictive Analytics</li>
+                        <li><i class="ri-check-line"></i> KPI Tracking</li>
+                        <li><i class="ri-check-line"></i> System Fine-tuning</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Band -->
+    <section class="stats-band">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>40%</h4>
+                    <p>Average Efficiency Gain</p>
+                </div>
+                <div class="stat-item">
+                    <h4>5+</h4>
+                    <p>Years MENA Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h4>87%</h4>
+                    <p>Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Footer -->
+    <footer class="cta-footer">
+        <div class="container">
+            <h2>Ready to Automate?</h2>
+            <p>Let's discuss your project</p>
+            <a href="#" class="btn">Get Started</a>
+            
+            <div class="contact-info">
+                <div>
+                    <i class="ri-mail-send-line"></i>
+                    <!-- CONTACT: Email -->
+                    <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a8a1a4acad89bfaca7bdbcbbacaab0aaa5ace7babdbcada0a6">[email&#160;protected]</a></span>
+                </div>
+                <div>
+                    <i class="ri-phone-line"></i>
+                    <!-- CONTACT: Phone -->
+                    <span>+201501656010</span>
+                </div>
+                <div>
+                    <i class="ri-map-pin-line"></i>
+                    <!-- CONTACT: Location -->
+                    <span>Cairo, Egypt</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

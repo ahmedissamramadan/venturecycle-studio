@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>MENA Business Automation Checklist | VentureCycle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #1ABC9C;
+            --primary-dark: #16a085;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg-light: #F5F6FA;
+            --bg-white: #FFFFFF;
+            --accent: #E6AA5B;
+            --border: #DFE6E9;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Regular.otf') format('opentype');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Medium.otf') format('opentype');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/NotoSansHans-Bold.otf') format('opentype');
+            font-weight: 700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            width: 1200px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        /* Header */
+        header {
+            padding: 30px 0;
+            background: var(--bg-white);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 32px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0 80px;
+            background: linear-gradient(135deg, #f9fbfb 0%, var(--bg-light) 100%);
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .value-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .value-list li {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .value-list i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        /* Form */
+        .lead-form-container {
+            flex: 0 0 400px;
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .lead-form-container h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 24px;
+            background: var(--primary);
+            color: var(--bg-white);
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .privacy-note {
+            font-size: 12px;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        /* Preview Section */
+        .preview-section {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .preview-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .preview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .preview-img-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+            background: var(--bg-light);
+            aspect-ratio: 1696 / 2528;
+        }
+
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .page-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .preview-caption {
+            font-size: 14px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 188, 156, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 24px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 80px 0;
+            background: var(--bg-white);
+            text-align: center;
+        }
+
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .stars {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
+
+        .quote {
+            font-size: 24px;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .author {
+            font-size: 16px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 80px 0;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .final-cta .btn {
+            width: auto;
+            padding: 16px 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo i {
+            color: var(--primary);
+        }
+
+        .footer-contact {
+            text-align: right;
+            color: #a0aab2;
+        }
+
+        .footer-contact p {
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            color: #a0aab2;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            color: #a0aab2;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="ri-loop-right-fill"></i>
+                VentureCycle
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <h1>Free Download: The MENA Business Automation Checklist</h1>
+                <p class="subtitle">15 high-impact workflows you can automate today—plus an ROI calculator to estimate your savings</p>
+                <ul class="value-list">
+                    <li><i class="ri-check-line"></i> 15 ready-to-automate workflows for MENA businesses</li>
+                    <li><i class="ri-check-line"></i> Priority matrix: Impact vs. Complexity</li>
+                    <li><i class="ri-check-line"></i> ROI calculator worksheet</li>
+                    <li><i class="ri-check-line"></i> Arabic-first automation strategies</li>
+                    <li><i class="ri-check-line"></i> Free 30-minute consultation included</li>
+                </ul>
+            </div>
+            
+            <div class="lead-form-container" id="lead-form">
+                <h2>Get Your Free Checklist</h2>
+                <!-- FORM: Replace action="FORM_ENDPOINT_HERE" -->
+                <form action="FORM_ENDPOINT_HERE" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Your Work Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="company" class="form-control" placeholder="Company Name (Optional)">
+                    </div>
+                    <button type="submit" class="btn">Download Free Checklist</button>
+                    <p class="privacy-note">We respect your privacy. Unsubscribe anytime.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section class="preview-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What's Inside</h2>
+            </div>
+            <div class="grid">
+                <!-- Page 1 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 1</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/Kf1MZFwEMbJqZB8f.png" alt="Cover" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Cover</p>
+                </div>
+                <!-- Page 2 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 2</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/EH0YVkO2GT2qU5RQ.png" alt="Why Automation Matters" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Why Automation Matters</p>
+                </div>
+                <!-- Page 3 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 3</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/m6kTytpoFQ4rKRcp.png" alt="Customer-Facing Workflows" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Customer-Facing Workflows</p>
+                </div>
+                <!-- Page 4 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 4</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/je1Fp6EpJR4Fhv6y.png" alt="Internal Operations" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Internal Operations</p>
+                </div>
+                <!-- Page 5 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 5</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/Q3mNmxQfPMIM2eyX.png" alt="Priority Matrix" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Priority Matrix</p>
+                </div>
+                <!-- Page 6 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 6</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/ctWKvjvcfsGqmD9f.png" alt="ROI Calculator" class="preview-img">
+                    </div>
+                    <p class="preview-caption">ROI Calculator</p>
+                </div>
+                <!-- Page 7 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 7</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/gD1CVgZt6kDlTQQQ.png" alt="Next Steps" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Next Steps</p>
+                </div>
+                <!-- Page 8 -->
+                <div class="preview-card">
+                    <div class="preview-img-wrapper">
+                        <span class="page-badge">Page 8</span>
+                        <img src="https://a.lovart.ai/artifacts/agent/DgMe5oPDKjHB8kKv.png" alt="Contact Info" class="preview-img">
+                    </div>
+                    <p class="preview-caption">Contact Info</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why MENA Businesses Love This Checklist</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-list-check"></i>
+                    </div>
+                    <h3>Actionable & Specific</h3>
+                    <p>Not generic advice—15 workflows designed specifically for Arabic-speaking businesses with real implementation examples.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-calculator-line"></i>
+                    </div>
+                    <h3>ROI Calculator Included</h3>
+                    <p>Estimate your potential savings in minutes. Most businesses discover $50K–$200K in annual savings opportunities.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <h3>Free Expert Consultation</h3>
+                    <p>Download includes a free 30-minute discovery call to discuss your specific automation opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="quote">"This checklist helped us identify $180K in annual savings we were leaving on the table. We started with 3 quick wins and saw ROI in 8 weeks."</p>
+                <p class="author">— Sarah M., CFO, Cairo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <a href="#lead-form" class="btn">Download Your Free Checklist Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo">
+                    <i class="ri-loop-right-fill"></i>
+                    VentureCycle Studio
+                </div>
+                <div class="footer-contact">
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f8f1f4fcfdd9effcf7edecebfcfae0faf5fcb7eaedecfdf0f6">[email&#160;protected]</a></p>
+                    <p>+201501656010</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 VentureCycle Studio</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EXIT-INTENT POPUP MODAL -->
+    <!-- INSTRUCTIONS:
+         1. Uncomment the HTML block below to enable the popup structure
+         2. Update the FORM_ENDPOINT_HERE action URL
+         3. Customize the text if needed
+    -->
+    <!--
+    <div id="exit-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center;">
+      <div style="background:white; padding:40px; border-radius:8px; max-width:500px; text-align:center; position:relative;">
+        <button onclick="closeExitPopup()" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; cursor:pointer; color:#636E72;">&times;</button>
+        
+        <h2 style="color:#2D3436; margin-bottom:16px; font-size:28px;">Wait! Before You Go...</h2>
+        <p style="color:#636E72; margin-bottom:24px; font-size:16px;">Download our free MENA Business Automation Checklist and discover 15 workflows you can automate today.</p>
+        
+        <form action="FORM_ENDPOINT_HERE" method="POST" style="margin-bottom:16px;">
+          <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:14px; margin-bottom:12px; border:1px solid #DFE6E9; border-radius:6px; font-size:16px; font-family:inherit;">
+          <input type="email" name="email" placeholder="Your Email" required style="width:100%; padding:14px; margin-bottom:16px; border:1px solid #DFE6E9; border-radius:6px; font-size:16px; font-family:inherit;">
+          <button type="submit" style="width:100%; padding:16px; background:#1ABC9C; color:white; border:none; border-radius:6px; font-size:18px; font-weight:bold; cursor:pointer; transition:background 0.3s ease;">Download Free Checklist</button>
+        </form>
+        
+        <p style="font-size:13px; color:#636E72; font-weight:500;">✓ 15 automation workflows &nbsp; ✓ ROI calculator &nbsp; ✓ Free consultation</p>
+      </div>
+    </div>
+    -->
+
+    <!-- EXIT-INTENT POPUP JAVASCRIPT -->
+    <!-- INSTRUCTIONS:
+         1. Uncomment this script block to activate the detection logic
+         2. The popup triggers when the mouse leaves the top of the viewport
+         3. Adjust e.clientY < 0 condition to change sensitivity if needed
+    -->
+    <!--
+    <script>
+    let exitIntentShown = false;
+
+    document.addEventListener('mouseleave', function(e) {
+      if (e.clientY < 0 && !exitIntentShown) {
+        showExitPopup();
+        exitIntentShown = true;
+      }
+    });
+
+    function showExitPopup() {
+      document.getElementById('exit-popup').style.display = 'flex';
+    }
+
+    function closeExitPopup() {
+      document.getElementById('exit-popup').style.display = 'none';
+    }
+    </script>
+    -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

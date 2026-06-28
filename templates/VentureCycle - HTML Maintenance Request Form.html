@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Request Form - VentureCycle Studio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --brand-turquoise: #1ABC9C;
+            --brand-turquoise-hover: #16A085;
+            --brand-orange: #E6AA5B;
+            --brand-red: #E74C3C;
+            --brand-yellow: #F1C40F;
+            --brand-green: #2ECC71;
+            --text-dark: #2D3436;
+            --text-muted: #636E72;
+            --bg-light: #F5F6FA;
+            --bg-white: #FFFFFF;
+            --border-color: #DFE6E9;
+            --focus-ring: rgba(26, 188, 156, 0.25);
+            --border-radius: 8px;
+            --section-radius: 12px;
+            --font-main: 'Inter', sans-serif;
+            --form-width: 900px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            min-width: var(--form-width);
+        }
+
+        .container {
+            width: var(--form-width);
+            background-color: var(--bg-white);
+            border-radius: var(--section-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            padding: 40px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-white);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-area img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .header-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .meta-info {
+            text-align: right;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .meta-info div {
+            margin-bottom: 4px;
+        }
+
+        .form-intro {
+            padding: 30px 40px;
+            background-color: rgba(26, 188, 156, 0.05);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+
+        /* Form Layout */
+        .form-container {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--brand-turquoise);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .required::after {
+            content: '*';
+            color: var(--brand-red);
+            margin-left: 4px;
+        }
+
+        /* Inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="datetime-local"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: var(--font-main);
+            font-size: 14px;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+            background-color: var(--bg-white);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--brand-turquoise);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Radio & Checkbox */
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-group.horizontal {
+            flex-direction: row;
+            gap: 24px;
+        }
+
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .radio-item input, .checkbox-item input {
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--brand-turquoise);
+        }
+
+        .radio-label {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        .radio-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Priority Styling */
+        .priority-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .priority-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: var(--bg-white);
+        }
+
+        .priority-card:hover {
+            background-color: var(--bg-light);
+        }
+
+        .priority-card input[type="radio"] {
+            margin-top: 4px;
+        }
+
+        .priority-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .p-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge.p1 { background: rgba(231, 76, 60, 0.1); color: var(--brand-red); }
+        .badge.p2 { background: rgba(230, 170, 91, 0.1); color: var(--brand-orange); }
+        .badge.p3 { background: rgba(241, 196, 15, 0.1); color: #D4AC0D; }
+        .badge.p4 { background: rgba(46, 204, 113, 0.1); color: var(--brand-green); }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            background-color: var(--bg-light);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--brand-turquoise);
+        }
+
+        .file-upload i {
+            font-size: 32px;
+            color: var(--brand-turquoise);
+            margin-bottom: 10px;
+        }
+
+        .file-upload p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Actions */
+        .form-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .btn-primary {
+            background-color: var(--brand-turquoise);
+            color: white;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--brand-turquoise-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d7da;
+        }
+
+        .btn-link {
+            background: none;
+            color: var(--text-muted);
+            text-decoration: underline;
+        }
+
+        .btn-link:hover {
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer .urgent {
+            color: var(--brand-orange);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer p {
+            color: #b2bec3;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-area">
+                <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo">
+                <div class="header-text">
+                    <h1>Maintenance Request Form</h1>
+                    <span style="color: var(--text-muted); font-size: 14px;">VentureCycle Studio</span>
+                </div>
+            </div>
+            <div class="meta-info">
+                <div><strong>Form ID:</strong> REQ-2023-8942</div>
+                <div><strong>Date:</strong> Oct 26, 2023</div>
+            </div>
+        </div>
+
+        <div class="form-intro">
+            Please complete this form to submit a maintenance request for your AI automation system. Our team will review and respond according to our SLA commitments.
+        </div>
+
+        <div class="form-container">
+            <form>
+                <!-- Section 1 -->
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-user-settings-line"></i> Section 1: Contact Information</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="required">Company Name</label>
+                            <input type="text" placeholder="Enter company name">
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Contact Person</label>
+                            <input type="text" placeholder="Full name">
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Email Address</label>
+                            <input type="email" placeholder="work@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label>Project/System ID</label>
+                            <input type="text" placeholder="e.g., SYS-A123">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-tools-line"></i> Section 2: Request Details</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="required">Request Type</label>
+                            <select>
+                                <option value="" disabled selected>Select request type</option>
+                                <option>Bug Fix</option>
+                                <option>Performance Issue</option>
+                                <option>Feature Enhancement</option>
+                                <option>Security Update</option>
+                                <option>Configuration Change</option>
+                                <option>General Maintenance</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Affected Component</label>
+                            <select>
+                                <option value="" disabled selected>Select component</option>
+                                <option>API Gateway</option>
+                                <option>Authentication Service</option>
+                                <option>Automation Engine</option>
+                                <option>NLP Service</option>
+                                <option>Database</option>
+                                <option>Frontend Application</option>
+                                <option>Infrastructure</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label class="required">Priority Level</label>
+                        <div class="priority-grid">
+                            <label class="priority-card">
+                                <input type="radio" name="priority" value="p1">
+                                <div class="priority-info">
+                                    <span class="p-title"><span class="badge p1">P1 - Critical</span></span>
+                                    <span class="p-desc">System down or critical functionality unavailable. Immediate action required.</span>
+                                </div>
+                            </label>
+                            <label class="priority-card">
+                                <input type="radio" name="priority" value="p2">
+                                <div class="priority-info">
+                                    <span class="p-title"><span class="badge p2">P2 - High</span></span>
+                                    <span class="p-desc">Major functionality impaired causing significant operational impact.</span>
+                                </div>
+                            </label>
+                            <label class="priority-card">
+                                <input type="radio" name="priority" value="p3" checked>
+                                <div class="priority-info">
+                                    <span class="p-title"><span class="badge p3">P3 - Medium</span></span>
+                                    <span class="p-desc">Minor issue with workaround available. Moderate impact.</span>
+                                </div>
+                            </label>
+                            <label class="priority-card">
+                                <input type="radio" name="priority" value="p4">
+                                <div class="priority-info">
+                                    <span class="p-title"><span class="badge p4">P4 - Low</span></span>
+                                    <span class="p-desc">General questions or minor requests. Minimal impact.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-file-text-line"></i> Section 3: Issue Description</h2>
+                    <div class="form-group">
+                        <label class="required">Issue Title</label>
+                        <input type="text" placeholder="Brief summary of the issue">
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Detailed Description</label>
+                        <textarea placeholder="Please describe the issue in detail, including steps to reproduce, error messages, and impact on operations..."></textarea>
+                    </div>
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>When Did This Start?</label>
+                            <input type="datetime-local">
+                        </div>
+                        <div class="form-group">
+                            <label>Is This Recurring?</label>
+                            <div class="radio-group horizontal" style="margin-top: 10px;">
+                                <label class="radio-item">
+                                    <input type="radio" name="recurring" value="yes"> Yes
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="recurring" value="no" checked> No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency (if recurring)</label>
+                            <select>
+                                <option>First occurrence</option>
+                                <option>Occasionally</option>
+                                <option>Frequently</option>
+                                <option>Always</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-bar-chart-line"></i> Section 4: Impact Assessment</h2>
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Business Impact</label>
+                            <select>
+                                <option>Critical - Business operations stopped</option>
+                                <option>High - Significant impact on operations</option>
+                                <option selected>Medium - Moderate impact, workaround available</option>
+                                <option>Low - Minimal impact</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Users Affected</label>
+                            <input type="number" placeholder="e.g., 50">
+                        </div>
+                        <div class="form-group">
+                            <label>Estimated Revenue Impact</label>
+                            <input type="text" placeholder="Optional">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-attachment-2"></i> Section 5: Additional Information</h2>
+                    <div class="form-group">
+                        <label>Error Messages/Logs</label>
+                        <textarea placeholder="Paste any relevant error messages or log entries here..." style="min-height: 80px; font-family: monospace;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Screenshots/Attachments</label>
+                        <div class="file-upload">
+                            <i class="ri-upload-cloud-2-line"></i>
+                            <p>Upload screenshots, logs, or other relevant files (max 10MB)</p>
+                            <p style="font-size: 12px; margin-top: 4px;">Drag and drop or click to browse</p>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Preferred Contact Method</label>
+                            <div class="radio-group horizontal" style="margin-top: 10px;">
+                                <label class="radio-item"><input type="radio" name="contact" checked> Email</label>
+                                <label class="radio-item"><input type="radio" name="contact"> Phone</label>
+                                <label class="radio-item"><input type="radio" name="contact"> Video Call</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Best Time to Contact</label>
+                            <input type="text" placeholder="e.g., Weekdays 9 AM - 5 PM GMT+2">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="section">
+                    <h2 class="section-title"><i class="ri-lightbulb-line"></i> Section 6: Temporary Workaround</h2>
+                    <div class="form-group">
+                        <label>Have you found a temporary workaround?</label>
+                        <div class="radio-group horizontal" style="margin-bottom: 16px;">
+                            <label class="radio-item"><input type="radio" name="workaround"> Yes</label>
+                            <label class="radio-item"><input type="radio" name="workaround" checked> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>If yes, please describe:</label>
+                        <textarea placeholder="Describe steps taken to mitigate the issue temporarily..." style="min-height: 80px;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="section" style="margin-bottom: 0;">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" required>
+                            <span class="radio-label">
+                                I acknowledge that response times are based on the priority level selected and our SLA commitments.
+                            </span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" required>
+                            <span class="radio-label">
+                                I confirm that all information provided is accurate to the best of my knowledge.
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary">Submit Request</button>
+                    <button type="button" class="btn btn-secondary">Save as Draft</button>
+                    <button type="button" class="btn btn-link">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer">
+            <div class="urgent"><i class="ri-alarm-warning-fill"></i> For urgent P1 issues, please call our emergency hotline: +201501656010</div>
+            <p>Expected response time will be communicated via email based on SLA.</p>
+            <p style="margin-top: 8px;">Contact: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="57242227273825231721323923222532342e343b3279242322333e38">[email&#160;protected]</a></p>
+        </div>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

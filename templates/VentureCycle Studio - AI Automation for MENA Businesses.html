@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VentureCycle Studio - AI Automation for MENA Businesses</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --primary: #1ABC9C;
+    --primary-hover: #16A085;
+    --secondary-orange: #E6AA5B;
+    --secondary-purple: #6C5CE7;
+    --secondary-teal: #00B8D4;
+    --text-dark: #2D3436;
+    --text-medium: #636E72;
+    --text-light: #DFE6E9;
+    --bg-white: #FFFFFF;
+    --bg-offwhite: #F5F6FA;
+    --bg-dark: #2D3436;
+    --font-en: 'Inter', sans-serif;
+    --font-ar: 'Cairo', sans-serif;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-en);
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--bg-white);
+    -webkit-font-smoothing: antialiased;
+    width: 1200px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    color: var(--text-dark);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  h1 { font-size: 48px; margin-bottom: 24px; }
+  h2 { font-size: 36px; margin-bottom: 16px; }
+  h3 { font-size: 24px; margin-bottom: 12px; }
+  p { font-size: 18px; color: var(--text-medium); margin-bottom: 24px; }
+  .text-small { font-size: 16px; }
+  .text-xs { font-size: 14px; }
+
+  /* Utilities */
+  .container {
+    width: 100%;
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .text-center { text-align: center; }
+  .text-primary { color: var(--primary); }
+  .text-white { color: var(--bg-white); }
+  .bg-offwhite { background-color: var(--bg-offwhite); }
+  .bg-primary { background-color: var(--primary); color: white; }
+  .bg-dark { background-color: var(--bg-dark); color: white; }
+  
+  .section-padding { padding: 100px 0; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 36px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 188, 156, 0.4);
+  }
+
+  /* Patterns */
+  .pattern-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pattern-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(26, 188, 156, 0.1) 1px, transparent 0);
+    background-size: 32px 32px;
+    z-index: 0;
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 160px 0 100px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .trust-signals {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    color: var(--text-medium);
+    font-size: 16px;
+  }
+
+  /* Problem Cards */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 60px;
+  }
+
+  .card {
+    background: var(--bg-offwhite);
+    padding: 40px 32px;
+    border-radius: 12px;
+    border-top: 4px solid var(--primary);
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(26, 188, 156, 0.1);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  /* Solution Benefits */
+  .benefits {
+    margin-top: 60px;
+  }
+  
+  .benefit-item {
+    padding: 24px;
+  }
+
+  /* Stats Band */
+  .stats-band {
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  /* Services */
+  .service-card {
+    background: white;
+    padding: 48px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 32px;
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .service-icon {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: white;
+  }
+
+  .icon-tech { background: var(--primary); }
+  .icon-strategy { background: var(--secondary-orange); }
+  .icon-analytics { background: var(--secondary-teal); }
+
+  .service-result {
+    margin-top: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  /* Testimonials */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 60px;
+  }
+
+  .testimonial {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  }
+
+  .stars {
+    color: var(--primary);
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .quote {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .author-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ddd;
+  }
+
+  /* Logos */
+  .client-logos {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 80px;
+    opacity: 0.6;
+    filter: grayscale(100%);
+  }
+  
+  .client-logo {
+    height: 40px;
+    background: #ccc;
+    width: 120px;
+  }
+
+  /* Process */
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    right: 50px;
+    height: 2px;
+    background: repeating-linear-gradient(to right, var(--primary) 0, var(--primary) 10px, transparent 10px, transparent 20px);
+    z-index: 0;
+  }
+
+  .step {
+    width: 23%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-number {
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 auto 24px;
+    border: 8px solid var(--bg-white);
+  }
+
+  /* FAQ */
+  .faq-container {
+    max-width: 800px;
+    margin: 60px auto 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #eee;
+    padding: 24px 0;
+  }
+
+  .faq-question {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .faq-question i {
+    color: var(--primary);
+  }
+
+  .faq-answer {
+    margin-top: 16px;
+    color: var(--text-medium);
+    display: block; /* Typically handled by JS, static for now */
+  }
+
+  /* Form Section */
+  .cta-section {
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .form-container {
+    max-width: 600px;
+    margin: 40px auto 0;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--font-en);
+    font-size: 16px;
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  /* Footer */
+  .footer {
+    background: #1e2425;
+    color: var(--text-light);
+    padding: 60px 0 40px;
+    text-align: center;
+  }
+
+  .footer-links {
+    margin: 24px 0;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    color: var(--text-light);
+    text-decoration: none;
+  }
+  
+  .footer-contact {
+    margin-bottom: 24px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo">
+    <a href="#cta" class="btn btn-primary" style="padding: 12px 24px; font-size: 16px;">Book Discovery Call</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero pattern-bg">
+    <div class="container hero-content">
+      <!-- Variant A (Default) -->
+      <h1>Stop Losing Time to Manual Workflows</h1>
+      <p style="font-size: 20px;">We build AI automation systems that understand Arabic, integrate with your tools, and deliver results in weeks—not months.</p>
+      
+      <!-- Variant B (Commented) -->
+      <!-- 
+      <h1>40% More Efficiency Without Hiring More Staff</h1>
+      <p style="font-size: 20px;">Custom AI automation for MENA businesses. Speak Arabic. Work with your systems. Proven results.</p>
+      -->
+
+      <a href="#cta" class="btn btn-primary" style="margin-top: 24px;">Book Your Free Discovery Call</a>
+      
+      <div class="trust-signals">
+        <span><i class="ri-check-line text-primary"></i> 30-minute consultation</span>
+        <span><i class="ri-check-line text-primary"></i> No commitment</span>
+        <span><i class="ri-check-line text-primary"></i> Arabic & English support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="section-padding bg-offwhite">
+    <div class="container">
+      <div class="text-center">
+        <h2>You're Not Alone</h2>
+        <p>MENA businesses face unique challenges that off-the-shelf tools can't solve:</p>
+      </div>
+      
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><i class="ri-time-line"></i></div>
+          <h3>Manual Operations Eating Your Time</h3>
+          <p class="text-small mb-0">Your team spends hours on repetitive tasks that could be automated—but most tools don't support Arabic or understand regional workflows.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon"><i class="ri-translate"></i></div>
+          <h3>Language Barriers Holding You Back</h3>
+          <p class="text-small mb-0">International platforms ignore Arabic. You're forced to choose between powerful tools and your language.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon"><i class="ri-money-dollar-circle-line"></i></div>
+          <h3>Slow, Expensive Implementation</h3>
+          <p class="text-small mb-0">Enterprise solutions take 6–12 months and cost a fortune. You need results now, not next year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center" style="max-width: 800px; margin: 0 auto;">
+        <h2>We Build Automation That Actually Works for MENA</h2>
+        <p>VentureCycle specializes in AI-powered workflows designed for Arabic-speaking businesses. We integrate with your existing tools, support your language, and deliver measurable results fast.</p>
+      </div>
+      
+      <div class="grid-3 benefits">
+        <div class="benefit-item text-center">
+          <h3 class="text-primary">Arabic-First AI</h3>
+          <p class="text-small">Natural language processing that understands Arabic context, dialects, and business terminology.</p>
+        </div>
+        <div class="benefit-item text-center">
+          <h3 class="text-primary">Fast Implementation</h3>
+          <p class="text-small">Live systems in 4–8 weeks, not months. Agile approach with quick wins first.</p>
+        </div>
+        <div class="benefit-item text-center">
+          <h3 class="text-primary">Proven ROI</h3>
+          <p class="text-small">Average 40% efficiency gain. Track every metric. Continuous optimization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Band -->
+  <section class="bg-primary stats-band pattern-bg">
+    <div class="container">
+      <div class="grid-3" style="margin-top: 0;">
+        <div>
+          <div class="stat-number">40%</div>
+          <p class="text-white mb-0">Average Efficiency Gain</p>
+        </div>
+        <div>
+          <div class="stat-number">5+</div>
+          <p class="text-white mb-0">Years MENA Experience</p>
+        </div>
+        <div>
+          <div class="stat-number">87%</div>
+          <p class="text-white mb-0">Client Satisfaction</p>
+        </div>
+      </div>
+      <a href="#cta" class="btn" style="background: white; color: var(--primary); margin-top: 48px;">See How We Can Help Your Business</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section-padding bg-offwhite">
+    <div class="container">
+      <div class="text-center mb-60">
+        <h2>What We Do</h2>
+        <p>End-to-end AI automation tailored to your business</p>
+      </div>
+      
+      <div style="max-width: 900px; margin: 0 auto;">
+        <div class="service-card">
+          <div class="service-icon icon-tech"><i class="ri-code-s-slash-line"></i></div>
+          <div>
+            <h3>Technical Implementation</h3>
+            <p class="text-small mb-0">Custom AI systems, Arabic NLP integration, workflow engines, API connections, cloud infrastructure.</p>
+            <div class="service-result">→ Reduce manual work by 40%+ and free your team for strategic tasks.</div>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon icon-strategy"><i class="ri-lightbulb-line"></i></div>
+          <div>
+            <h3>Strategic Consultation</h3>
+            <p class="text-small mb-0">Process mapping, technology assessment, implementation roadmap, change management, team training.</p>
+            <div class="service-result">→ Make confident decisions with a clear plan and expert guidance.</div>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon icon-analytics"><i class="ri-bar-chart-box-line"></i></div>
+          <div>
+            <h3>Analytics & Optimization</h3>
+            <p class="text-small mb-0">Performance monitoring, data insights, continuous improvement, ROI tracking, reporting dashboards.</p>
+            <div class="service-result">→ See exactly what's working and optimize for maximum impact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2>How We Work</h2>
+        <p>Simple, transparent, results-focused</p>
+      </div>
+      
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h4 style="font-size: 20px; margin-bottom: 8px;">Discovery Call</h4>
+          <p class="text-small text-primary mb-2">(30 min)</p>
+          <p class="text-small">We learn about your business, challenges, and goals. No sales pitch—just questions and insights.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h4 style="font-size: 20px; margin-bottom: 8px;">Custom Proposal</h4>
+          <p class="text-small text-primary mb-2">(48 hours)</p>
+          <p class="text-small">Receive a tailored plan with scope, timeline, and fixed pricing. Clear deliverables, no surprises.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h4 style="font-size: 20px; margin-bottom: 8px;">Rapid Implementation</h4>
+          <p class="text-small text-primary mb-2">(4–8 weeks)</p>
+          <p class="text-small">Agile sprints with weekly check-ins. Quick wins first, then scale. You see progress from week one.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">04</div>
+          <h4 style="font-size: 20px; margin-bottom: 8px;">Ongoing Optimization</h4>
+          <p class="text-small text-primary mb-2">&nbsp;</p>
+          <p class="text-small">Monitor performance, refine workflows, and maximize ROI. Continuous support and improvement.</p>
+        </div>
+      </div>
+      
+      <div class="text-center" style="margin-top: 60px;">
+        <a href="#cta" class="btn btn-primary">Start with a Free Discovery Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section id="cta" class="bg-dark cta-section pattern-bg">
+    <div class="container" style="position: relative; z-index: 1;">
+      <h2 class="text-white" style="font-size: 40px;">Ready to Automate?</h2>
+      <p style="color: var(--text-light); max-width: 600px; margin: 0 auto;">Book a 30-minute discovery call. No commitment, no sales pressure—just a conversation about your business.</p>
+      
+      <div class="form-container">
+        <!-- FORM: Replace action="FORM_ENDPOINT_HERE" with your form handler -->
+        <form action="#" method="POST">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" class="form-control" placeholder="WhatsApp Number (optional)">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" placeholder="What's your biggest workflow challenge?" rows="2"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Book My Free Discovery Call</button>
+        </form>
+      </div>
+      
+      <div class="trust-signals" style="color: var(--text-light); margin-top: 32px;">
+        <span>✓ 30-minute consultation</span>
+        <span>✓ No commitment required</span>
+        <span>✓ Arabic & English support</span>
+        <span>✓ Response within 24 hours</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <img src="../assets/p-vc.png" alt="Logo" style="height: 30px; margin-bottom: 24px; filter: grayscale(100%) brightness(200%);">
+      <div class="footer-contact">
+        <p class="mb-0" style="color: var(--text-light); font-size: 16px;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="45242d2820210533202b31303720263c2629206b363130212c2a">[email&#160;protected]</a> | +201501656010 | Cairo, Egypt</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <p class="text-xs mb-0" style="color: #888;">© 2026 VentureCycle Studio. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureCycle Studio - Client Onboarding Checklist</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1ABC9C;
+            --secondary: #E6AA5B;
+            --text-dark: #2D3436;
+            --text-light: #636e72;
+            --bg-light: #F5F6FA;
+            --bg-primary-light: #E8F8F5;
+            --bg-secondary-light: #FFF3E0;
+            --border: #dfe6e9;
+            --white: #ffffff;
+        }
+
+        @font-face {
+            font-family: 'AlibabaSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Regular.otf') format('opentype');
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: 'AlibabaSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Medium.otf') format('opentype');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'AlibabaSans';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/AlibabaSans-Bold.otf') format('opentype');
+            font-weight: bold;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: 'AlibabaSans', sans-serif;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 900px;
+            background-color: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 40px 0;
+            border-top: 8px solid var(--primary);
+            box-sizing: border-box;
+        }
+
+        /* Header Section */
+        .header {
+            padding: 50px 60px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .header-info {
+            text-align: right;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0 0 15px 0;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .meta-info strong {
+            color: var(--text-dark);
+        }
+
+        /* Welcome Section */
+        .welcome {
+            background-color: var(--bg-primary-light);
+            margin: 40px 60px;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .welcome p {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .contact-pill i {
+            color: var(--primary);
+        }
+
+        /* Progress Section */
+        .progress-section {
+            padding: 0 60px 30px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .progress-track {
+            height: 10px;
+            background: var(--bg-light);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-date {
+            font-size: 13px;
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        /* Phase Sections */
+        .phase {
+            padding: 0 60px 40px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .phase-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-primary-light);
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .phase-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .phase-subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .checklist {
+            display: grid;
+            gap: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .check-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(26,188,156,0.05);
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-top: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox i {
+            display: none;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .check-item.done .checkbox {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .check-item.done .checkbox i {
+            display: block;
+        }
+
+        .check-item.done .item-text {
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-text {
+            font-size: 15px;
+            color: var(--text-dark);
+            margin: 0 0 5px 0;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        /* Important Notes */
+        .important-notes {
+            margin: 0 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .note-card {
+            padding: 25px;
+            border-radius: 12px;
+            background: var(--bg-light);
+        }
+
+        .note-card.warning {
+            background: var(--bg-secondary-light);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .note-card.security {
+            background: var(--bg-primary-light);
+            border-left: 4px solid var(--primary);
+        }
+
+        .note-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .note-card.warning .note-title {
+            color: var(--secondary);
+        }
+
+        .note-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .note-list li {
+            margin-bottom: 8px;
+        }
+
+        /* Next Steps */
+        .next-steps {
+            padding: 0 60px 40px;
+        }
+
+        .step-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .step-num {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px 60px;
+            background: var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <img src="../assets/p-vc.png" alt="VentureCycle Studio Logo" class="logo">
+            <span class="logo-text">VentureCycle Studio</span>
+        </div>
+        <div class="header-info">
+            <h1 class="title">Client Onboarding Checklist</h1>
+            <div class="meta-info">
+                Client Name: <strong>[Client Company Name]</strong><br>
+                Project ID: <strong>VC-2026-001</strong><br>
+                Start Date: <strong>March 15, 2026</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Message -->
+    <div class="welcome">
+        <p>Welcome to VentureCycle Studio! We're excited to partner with you on your AI automation journey. This checklist will guide you through our onboarding process to ensure a smooth project start. Please complete all items before our kickoff meeting.</p>
+        <div class="contact-pill"><i class="ri-user-line"></i> VentureCycle Studio</div>
+        <div class="contact-pill"><i class="ri-mail-send-line"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="187970757d7c586e7d766c6d6a7d7b617b747d366b6c6d7c7177">[email&#160;protected]</a></div>
+        <div class="contact-pill"><i class="ri-phone-line"></i> +201501656010</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-section">
+        <div class="progress-header">
+            <span>Overall Completion</span>
+            <span style="color: var(--primary)">0%</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="progress-date">Estimated Completion: March 22, 2026</div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-icon"><i class="ri-flag-2-line"></i></div>
+            <div>
+                <h2 class="phase-title">Phase 1: Pre-Project Setup</h2>
+                <span class="phase-subtitle">Week 1</span>
+            </div>
+        </div>
+        <div class="checklist">
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Sign project proposal and contract</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Complete payment for initial deposit (30%)</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Provide company information and branding assets</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Designate primary point of contact</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Identify key stakeholders for interviews</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Schedule kickoff meeting</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase">
+        <div class="phase-header">
+            <div class="phase-icon"><i class="ri-folder-open-line"></i></div>
+            <div>
+                <h2 class="phase-title">Phase 2: Documentation & Access</h2>
+                <span class="phase-subtitle">Week 1</span>
+            </div>
+        </div>
+        <div class="checklist">
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Provide existing system documentation</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Share API documentation (if applicable)</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Grant access to development/staging environment</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Provide database schema/data samples</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Share current workflow diagrams</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Complete technical requirements questionnaire</p></div>
+            </div>
+            <div class="check-item">
+                <div class="checkbox"><i class="ri-check-line"></i></div>
+                <div class="item-content"><p class="item-text">Sign NDA and data security agreements</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div class="important-notes">
+        <div class="note-card warning">
+            <div class="note-title"><i class="ri-alert-line"></i> Critical Items</div>
+            <ul class="note-list">
+                <li>Contract signature and initial payment required before work begins</li>
+                <li>API documentation needed by March 18 to stay on schedule</li>
+                <li>Test environment access required by March 20</li>
+            </ul>
+        </div>
+        <div class="note-card security">
+            <div class="note-title"><i class="ri-shield-check-line" style="color: var(--primary)"></i> Security & Compliance</div>
+            <ul class="note-list">
+                <li>All data handled per signed NDA</li>
+                <li>GDPR/data protection compliance ensured</li>
+                <li>Regular security audits conducted</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="next-steps">
+        <div class="phase-header">
+            <div class="phase-icon"><i class="ri-run-line"></i></div>
+            <h2 class="phase-title">Next Steps</h2>
+        </div>
+        <div class="step-list">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div class="step-text">Complete all Phase 1 items by March 17</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div class="step-text">Provide documentation and access by March 20</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div class="step-text">Attend kickoff meeting on March 22 at 10:00 AM</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">4</div>
+                <div class="step-text">Begin Phase 1 (Discovery) on March 22</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>Version: 1.0 | Last Updated: March 15, 2026</div>
+        <div>Prepared By: VentureCycle Studio</div>
+    </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Simple script to toggle checkboxes for visual effect
+    document.querySelectorAll('.check-item').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('done');
+            
+            // Update progress calculation
+            const total = document.querySelectorAll('.check-item').length;
+            const done = document.querySelectorAll('.check-item.done').length;
+            const percent = Math.round((done / total) * 100);
+            
+            document.querySelector('.progress-bar').style.width = `${percent}%`;
+            document.querySelector('.progress-header span:last-child').textContent = `${percent}%`;
+        });
+    });
+</script>
+
+</body>
+</html>
